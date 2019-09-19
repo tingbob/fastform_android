@@ -48,7 +48,7 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
         // reformat the options in format needed
         final CharSequence[] options = new CharSequence[mFormElementPickerMulti.getOptions().size()];
         final boolean[] optionsSelected = new boolean[mFormElementPickerMulti.getOptions().size()];
-        final ArrayList<Integer> mSelectedItems = new ArrayList();
+        final ArrayList<Integer> mSelectedItems = new ArrayList<>();
 
         for (int i = 0; i < mFormElementPickerMulti.getOptions().size(); i++) {
             options[i] = mFormElementPickerMulti.getOptions().get(i);
