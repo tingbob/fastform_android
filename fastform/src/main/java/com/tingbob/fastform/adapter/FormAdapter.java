@@ -86,7 +86,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      */
     public void setValueAtTag(int tag, String value) {
         for (FormElementObject f : this.mDataset) {
-            if (f.getTag() == tag) {
+            if (f.getTag().equals(tag)) {
                 f.setValue(value);
                 return;
             }
@@ -108,9 +108,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * @param tag
      * @return
      */
-    public FormElementObject getValueAtTag(int tag) {
+    public FormElementObject getValueAtTag(String tag) {
         for (FormElementObject f : this.mDataset) {
-            if (f.getTag() == tag) {
+            if (f.getTag().equals(tag)) {
                 return f;
             }
         }

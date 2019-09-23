@@ -7,7 +7,7 @@ package com.tingbob.fastform.model;
 public class BaseFormElement implements FormElementObject<BaseFormElement> {
 
     // private variables
-    private int mTag; // unique tag to identify the object
+    private String mTag; // unique tag to identify the object
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -15,7 +15,7 @@ public class BaseFormElement implements FormElementObject<BaseFormElement> {
     private boolean mRequired; // value to set is the field is required
 
     // setters
-    public BaseFormElement setTag(int mTag) {
+    public BaseFormElement setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
@@ -47,7 +47,7 @@ public class BaseFormElement implements FormElementObject<BaseFormElement> {
     }
 
     @Override
-    public int getTag() {
+    public String getTag() {
         return this.mTag;
     }
 

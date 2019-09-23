@@ -1,7 +1,7 @@
 package com.tingbob.fastform.model;
 
 public interface FormElementObject<T> {
-    int getTag();
+    String getTag();
 
     int getType();
 

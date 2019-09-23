@@ -12,7 +12,7 @@ import java.util.List;
 public class FormElementPickerSingle implements FormElementObject<FormElementPickerSingle> {
 
     // private variables
-    private int mTag; // unique tag to identify the object
+    private String mTag; // unique tag to identify the object
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -34,7 +34,7 @@ public class FormElementPickerSingle implements FormElementObject<FormElementPic
     }
 
     @Override
-    public int getTag() {
+    public String getTag() {
         return mTag;
     }
 
@@ -63,7 +63,7 @@ public class FormElementPickerSingle implements FormElementObject<FormElementPic
         return mRequired;
     }
 
-    public FormElementPickerSingle setTag(int mTag) {
+    public FormElementPickerSingle setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }

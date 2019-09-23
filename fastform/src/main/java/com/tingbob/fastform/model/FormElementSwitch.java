@@ -9,7 +9,7 @@ import com.tingbob.fastform.IFormElementType;
 public class FormElementSwitch implements FormElementObject<FormElementSwitch> {
 
     // private variables
-    private int mTag; // unique tag to identify the object
+    private String mTag; // unique tag to identify the object
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -29,7 +29,7 @@ public class FormElementSwitch implements FormElementObject<FormElementSwitch> {
     }
 
     @Override
-    public int getTag() {
+    public String getTag() {
         return mTag;
     }
 
@@ -58,7 +58,7 @@ public class FormElementSwitch implements FormElementObject<FormElementSwitch> {
         return mRequired;
     }
 
-    public FormElementSwitch setTag(int mTag) {
+    public FormElementSwitch setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }

@@ -9,7 +9,7 @@ import com.tingbob.fastform.IFormElementType;
 public class FormElementTextMultiLine implements FormElementObject<FormElementTextMultiLine> {
 
     // private variables
-    private int mTag; // unique tag to identify the object
+    private String mTag; // unique tag to identify the object
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -26,7 +26,7 @@ public class FormElementTextMultiLine implements FormElementObject<FormElementTe
     }
 
     @Override
-    public int getTag() {
+    public String getTag() {
         return mTag;
     }
 
@@ -55,7 +55,7 @@ public class FormElementTextMultiLine implements FormElementObject<FormElementTe
         return mRequired;
     }
 
-    public FormElementTextMultiLine setTag(int mTag) {
+    public FormElementTextMultiLine setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }

@@ -10,7 +10,7 @@ import com.tingbob.fastform.IFormElementType;
 public class FormHeader implements FormElementObject<FormHeader> {
 
     // private variables
-    private int mTag; // unique tag to identify the object
+    private String mTag; // unique tag to identify the object
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -30,7 +30,7 @@ public class FormHeader implements FormElementObject<FormHeader> {
     }
 
     @Override
-    public int getTag() {
+    public String getTag() {
         return mTag;
     }
 
@@ -59,7 +59,7 @@ public class FormHeader implements FormElementObject<FormHeader> {
         return mRequired;
     }
 
-    public FormHeader setTag(int mTag) {
+    public FormHeader setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
