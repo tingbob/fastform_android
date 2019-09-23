@@ -26,6 +26,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
     private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
+    private View mDatePickerButton;
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
     private ReloadListener mReloadListener;
@@ -37,6 +38,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mEditTextValue = v.findViewById(R.id.formElementValue);
+        mDatePickerButton = v.findViewById(R.id.linear_date_picker);
         mReloadListener = reloadListener;
         mCalendarCurrentDate = Calendar.getInstance();
     }
@@ -58,14 +60,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
         mEditTextValue.setHint(formElement.getHint());
         mEditTextValue.setFocusableInTouchMode(false);
 
-        mEditTextValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatePickerDialog.show();
-            }
-        });
-
-        mTextViewTitle.setOnClickListener(new View.OnClickListener() {
+        mDatePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDatePickerDialog.show();

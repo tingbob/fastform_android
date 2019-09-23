@@ -188,7 +188,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextPasswordViewHolder(v, new FormItemEditTextListener(this));
             case IFormElementType.TYPE_PICKER_DATE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(R.layout.form_element_date_picker, parent, false);
                 return new FormElementPickerDateViewHolder(v, mContext, this);
             case IFormElementType.TYPE_PICKER_TIME:
                 v = inflater.inflate(R.layout.form_element, parent, false);
