@@ -9,6 +9,14 @@ Add this in your app's **build.gradle** file:
 ```
 implementation 'com.tingbob.fastform:fastform:1.0.0'
 ```
+## Upload Jcenter operator line
+Input the line in Terminal:
+```
+./gradlew javadocJar
+./gradlew sourcesJar
+./gradlew install
+./gradlew bintrayUpload
+```
 
 License
 -----------------
