@@ -45,12 +45,12 @@ public class FormElementSwitch implements FormElementObject<FormElementSwitch> {
 
     @Override
     public String getValue() {
-        return mValue;
+        return (this.mValue == null) ? "" : this.mValue;
     }
 
     @Override
     public String getHint() {
-        return mHint;
+        return (this.mHint == null) ? "" : this.mHint;
     }
 
     @Override

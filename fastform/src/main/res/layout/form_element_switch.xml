@@ -6,13 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/colorFormMasterDivider" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +18,7 @@
             android:id="@+id/formElementTitle"
             tools:text="Personal Info"
             android:textSize="@dimen/elementTextTitleSize"
-            android:padding="16dp"
+            android:padding="15dp"
             android:textColor="@color/colorFormMasterElementTextTitle"/>
 
         <LinearLayout
@@ -34,7 +27,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="right"
-            android:paddingRight="16dp">
+            android:paddingRight="15dp">
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/formElementNegativeText"

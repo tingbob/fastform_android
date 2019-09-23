@@ -40,7 +40,7 @@ public class FormItemEditTextListener implements TextWatcher {
         String newValue = charSequence.toString();
 
         // trigger event only if the value is changed
-        if (!TextUtils.isEmpty(currentValue) && !currentValue.equals(newValue)) {
+        if (!currentValue.equals(newValue)) {
             formElementObject.setValue(newValue);
             if (formAdapter.getValueChangeListener() != null)
                 formAdapter.getValueChangeListener().onValueChanged(formElementObject);

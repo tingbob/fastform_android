@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorFormMasterHeaderBackground">#DDDDDD</color>
-    <color name="colorFormMasterHeaderText">#000000</color>
+    <color name="colorFormMasterHeaderBackground">#FFFFFF</color>
+    <color name="colorFormMasterHeaderText">#3388FF</color>
     <color name="colorFormMasterElementBackground">#FFFFFF</color>
-    <color name="colorFormMasterElementTextTitle">#222222</color>
+    <color name="colorFormMasterElementTextTitle">#000000</color>
     <color name="colorFormMasterElementTextValue">#000000</color>
-    <color name="colorFormMasterDivider">#DDDDDD</color>
+    <color name="colorFormMasterDivider">#d7d7d7</color>
 </resources>

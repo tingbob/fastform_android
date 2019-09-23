@@ -89,7 +89,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
             String newValue = sdfDate.format(mCalendarCurrentDate.getTime());
 
             // trigger event only if the value is changed
-            if (!TextUtils.isEmpty(currentValue) && !currentValue.equals(newValue)) {
+            if (!currentValue.equals(newValue)) {
                 mReloadListener.updateValue(mPosition, newValue);
             }
         }

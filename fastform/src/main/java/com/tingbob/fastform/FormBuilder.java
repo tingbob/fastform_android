@@ -1,7 +1,10 @@
 package com.tingbob.fastform;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -55,6 +58,13 @@ public class FormBuilder {
         linearLayoutManager.setStackFromEnd(false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        //add divider
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.bg_divider_gray);
+        dividerItemDecoration.setDrawable(drawable);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         recyclerView.setAdapter(mFormAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
