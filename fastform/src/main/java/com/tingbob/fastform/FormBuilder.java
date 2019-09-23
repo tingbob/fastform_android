@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.tingbob.fastform.adapter.FormAdapter;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
-import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 
 /** Wrapper class around the adapter to assist in building form
  * Created by Adib on 16-Apr-17.
@@ -62,10 +62,10 @@ public class FormBuilder {
 
     /**
      * add list of form elements to be shown
-     * @param baseFormElements
+     * @param formElementObjects
      */
-    public void addFormElements(List<BaseFormElement> baseFormElements) {
-        this.mFormAdapter.addElements(baseFormElements);
+    public void addFormElements(List<FormElementObject> formElementObjects) {
+        this.mFormAdapter.addElements(formElementObjects);
     }
 
     /**
@@ -73,7 +73,7 @@ public class FormBuilder {
      * @param tag
      * @return
      */
-    public BaseFormElement getFormElement(int tag) {
+    public FormElementObject getFormElement(int tag) {
         return this.mFormAdapter.getValueAtTag(tag);
     }
 
@@ -85,8 +85,8 @@ public class FormBuilder {
      */
     public boolean isValidForm() {
         for (int i = 0; i < this.mFormAdapter.getItemCount(); i++) {
-            BaseFormElement baseFormElement = this.mFormAdapter.getValueAtIndex(i);
-            if (baseFormElement.isRequired() && TextUtils.isEmpty(baseFormElement.getValue())) {
+            FormElementObject formElementObject = this.mFormAdapter.getValueAtIndex(i);
+            if (formElementObject.isRequired() && TextUtils.isEmpty(formElementObject.getValue())) {
                 return false;
             }
         }

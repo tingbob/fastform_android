@@ -5,11 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.tingbob.fastform.listener.FormItemEditTextListener;
-import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 
 /**
  * Base ViewHolder for all other viewholders
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class BaseViewHolder extends RecyclerView.ViewHolder implements BaseViewHolderInterface {
@@ -24,7 +24,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements BaseViewH
     }
 
     @Override
-    public void bind(int position, BaseFormElement formElement, Context context) {
+    public void bind(int position, FormElementObject formElement, Context context) {
 
     }
 

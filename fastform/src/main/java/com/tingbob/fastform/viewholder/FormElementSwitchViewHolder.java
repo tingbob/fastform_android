@@ -9,10 +9,11 @@ import android.widget.CompoundButton;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementSwitch;
 
 /**
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormElementSwitchViewHolder extends BaseViewHolder {
@@ -20,21 +21,21 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
     public AppCompatTextView mTextViewTitle, mTextViewPositive, mTextViewNegative;
     public SwitchCompat mSwitch;
     private ReloadListener mReloadListener;
-    private BaseFormElement mFormElement;
+    private FormElementObject mFormElement;
     private FormElementSwitch mFormElementSwitch;
     private int mPosition;
 
     public FormElementSwitchViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mTextViewPositive = (AppCompatTextView) v.findViewById(R.id.formElementPositiveText);
-        mTextViewNegative = (AppCompatTextView) v.findViewById(R.id.formElementNegativeText);
-        mSwitch = (SwitchCompat) v.findViewById(R.id.formElementSwitch);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mTextViewPositive = v.findViewById(R.id.formElementPositiveText);
+        mTextViewNegative = v.findViewById(R.id.formElementNegativeText);
+        mSwitch = v.findViewById(R.id.formElementSwitch);
         mReloadListener = reloadListener;
     }
 
     @Override
-    public void bind(final int position, BaseFormElement formElement, final Context context) {
+    public void bind(final int position, FormElementObject formElement, final Context context) {
         mFormElement = formElement;
         mPosition = position;
         mFormElementSwitch = (FormElementSwitch) mFormElement;

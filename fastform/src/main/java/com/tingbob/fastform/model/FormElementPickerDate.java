@@ -1,13 +1,22 @@
 package com.tingbob.fastform.model;
 
+import com.tingbob.fastform.IFormElementType;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 /**
- * Created by Riddhi - Rudra on 28-Jul-17.
+ * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementPickerDate extends BaseFormElement {
+public class FormElementPickerDate implements FormElementObject<FormElementPickerDate> {
+    // private variables
+    private int mTag; // unique tag to identify the object
+    private int mType; // type for the form element
+    private String mTitle; // title to be shown on left
+    private String mValue; // value to be shown on right
+    private String mHint; // value to be shown if mValue is null
+    private boolean mRequired; // value to set is the field is required
 
     private String dateFormat; // custom format for date
 
@@ -16,33 +25,70 @@ public class FormElementPickerDate extends BaseFormElement {
 
     public static FormElementPickerDate createInstance() {
         FormElementPickerDate formElementPickerDate = new FormElementPickerDate();
-        formElementPickerDate.setType(BaseFormElement.TYPE_PICKER_DATE);
+        formElementPickerDate.setType(IFormElementType.TYPE_PICKER_DATE);
         formElementPickerDate.setDateFormat("dd/MM/yy");
         return formElementPickerDate;
     }
 
+    @Override
+    public int getTag() {
+        return mTag;
+    }
+
+    @Override
+    public int getType() {
+        return mType;
+    }
+
+    @Override
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @Override
+    public String getValue() {
+        return mValue;
+    }
+
+    @Override
+    public String getHint() {
+        return mHint;
+    }
+
+    @Override
+    public boolean isRequired() {
+        return mRequired;
+    }
+
     public FormElementPickerDate setTag(int mTag) {
-        return (FormElementPickerDate)  super.setTag(mTag);
+        this.mTag = mTag;
+        return this;
     }
 
     public FormElementPickerDate setType(int mType) {
-        return (FormElementPickerDate)  super.setType(mType);
+        this.mType = mType;
+        return this;
     }
 
     public FormElementPickerDate setTitle(String mTitle) {
-        return (FormElementPickerDate)  super.setTitle(mTitle);
+        this.mTitle = mTitle;
+        return this;
     }
 
+    @Override
     public FormElementPickerDate setValue(String mValue) {
-        return (FormElementPickerDate)  super.setValue(mValue);
+        this.mValue = mValue;
+        return this;
     }
 
     public FormElementPickerDate setHint(String mHint) {
-        return (FormElementPickerDate)  super.setHint(mHint);
+        this.mHint = mHint;
+        return this;
     }
 
     public FormElementPickerDate setRequired(boolean required) {
-        return (FormElementPickerDate)  super.setRequired(required);
+        this.mRequired = required;
+        return this;
     }
 
     // custom setter

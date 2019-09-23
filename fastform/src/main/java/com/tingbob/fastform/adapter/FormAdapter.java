@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.ReloadListener;
-import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
 import com.tingbob.fastform.viewholder.FormElementPickerDateViewHolder;
@@ -36,7 +37,7 @@ import com.tingbob.fastform.viewholder.FormElementTextSingleLineViewHolder;
 public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements ReloadListener {
 
     private Context mContext;
-    private List<BaseFormElement> mDataset;
+    private List<FormElementObject> mDataset;
     private OnFormElementValueChangedListener mListener;
 
     /**
@@ -53,7 +54,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * adds list of elements to be shown
      * @param formObjects
      */
-    public void addElements(List<BaseFormElement> formObjects) {
+    public void addElements(List<FormElementObject> formObjects) {
         this.mDataset = formObjects;
         notifyDataSetChanged();
     }
@@ -62,7 +63,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * adds single element to be shown
      * @param formObject
      */
-    public void addElement(BaseFormElement formObject) {
+    public void addElement(FormElementObject formObject) {
         this.mDataset.add(formObject);
         notifyDataSetChanged();
     }
@@ -73,8 +74,8 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * @param value
      */
     public void setValueAtIndex(int position, String value) {
-        BaseFormElement baseFormElement = mDataset.get(position);
-        baseFormElement.setValue(value);
+        FormElementObject formElementObject = mDataset.get(position);
+        formElementObject.setValue(value);
         notifyDataSetChanged();
     }
 
@@ -84,7 +85,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * @param value
      */
     public void setValueAtTag(int tag, String value) {
-        for (BaseFormElement f : this.mDataset) {
+        for (FormElementObject f : this.mDataset) {
             if (f.getTag() == tag) {
                 f.setValue(value);
                 return;
@@ -98,7 +99,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * @param index
      * @return
      */
-    public BaseFormElement getValueAtIndex(int index) {
+    public FormElementObject getValueAtIndex(int index) {
         return (mDataset.get(index));
     }
 
@@ -107,8 +108,8 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * @param tag
      * @return
      */
-    public BaseFormElement getValueAtTag(int tag) {
-        for (BaseFormElement f : this.mDataset) {
+    public FormElementObject getValueAtTag(int tag) {
+        for (FormElementObject f : this.mDataset) {
             if (f.getTag() == tag) {
                 return f;
             }
@@ -121,7 +122,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      * get whole dataset
      * @return
      */
-    public List<BaseFormElement> getDataset() {
+    public List<FormElementObject> getDataset() {
         return mDataset;
     }
 
@@ -165,40 +166,40 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v;
         switch (viewType) {
-            case BaseFormElement.TYPE_HEADER:
+            case IFormElementType.TYPE_HEADER:
                 v = inflater.inflate(R.layout.form_element_header, parent, false);
                 return new FormElementHeader(v);
-            case BaseFormElement.TYPE_EDITTEXT_TEXT_SINGLELINE:
+            case IFormElementType.TYPE_EDITTEXT_TEXT_SINGLELINE:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
-            case BaseFormElement.TYPE_EDITTEXT_TEXT_MULTILINE:
+            case IFormElementType.TYPE_EDITTEXT_TEXT_MULTILINE:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextMultiLineViewHolder(v, new FormItemEditTextListener(this));
-            case BaseFormElement.TYPE_EDITTEXT_NUMBER:
+            case IFormElementType.TYPE_EDITTEXT_NUMBER:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextNumberViewHolder(v, new FormItemEditTextListener(this));
-            case BaseFormElement.TYPE_EDITTEXT_EMAIL:
+            case IFormElementType.TYPE_EDITTEXT_EMAIL:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextEmailViewHolder(v, new FormItemEditTextListener(this));
-            case BaseFormElement.TYPE_EDITTEXT_PHONE:
+            case IFormElementType.TYPE_EDITTEXT_PHONE:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextPhoneViewHolder(v, new FormItemEditTextListener(this));
-            case BaseFormElement.TYPE_EDITTEXT_PASSWORD:
+            case IFormElementType.TYPE_EDITTEXT_PASSWORD:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextPasswordViewHolder(v, new FormItemEditTextListener(this));
-            case BaseFormElement.TYPE_PICKER_DATE:
+            case IFormElementType.TYPE_PICKER_DATE:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementPickerDateViewHolder(v, mContext, this);
-            case BaseFormElement.TYPE_PICKER_TIME:
+            case IFormElementType.TYPE_PICKER_TIME:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementPickerTimeViewHolder(v, mContext, this);
-            case BaseFormElement.TYPE_PICKER_SINGLE:
+            case IFormElementType.TYPE_PICKER_SINGLE:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementPickerSingleViewHolder(v, mContext, this);
-            case BaseFormElement.TYPE_PICKER_MULTI:
+            case IFormElementType.TYPE_PICKER_MULTI:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementPickerMultiViewHolder(v, mContext, this);
-            case BaseFormElement.TYPE_SWITCH:
+            case IFormElementType.TYPE_SWITCH:
                 v = inflater.inflate(R.layout.form_element_switch, parent, false);
                 return new FormElementSwitchViewHolder(v, mContext, this);
             default:
@@ -221,7 +222,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         }
 
         // gets current object
-        BaseFormElement currentObject = mDataset.get(position);
+        FormElementObject currentObject = mDataset.get(position);
         holder.bind(position, currentObject, mContext);
     }
 

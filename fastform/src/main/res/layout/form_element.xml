@@ -38,7 +38,7 @@
             android:id="@+id/formElementValue"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
-            tools:text="Riddhiman Adib"
+            tools:text="tingbob"
             android:imeOptions="actionNext"
             android:padding="16dp"
             android:textColor="@color/colorFormMasterElementTextValue"/>

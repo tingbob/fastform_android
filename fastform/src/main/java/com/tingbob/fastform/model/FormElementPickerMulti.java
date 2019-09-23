@@ -1,13 +1,23 @@
 package com.tingbob.fastform.model;
 
+import com.tingbob.fastform.IFormElementType;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Riddhi - Rudra on 28-Jul-17.
+ * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementPickerMulti extends BaseFormElement {
+public class FormElementPickerMulti implements FormElementObject<FormElementPickerMulti> {
+
+    // private variables
+    private int mTag; // unique tag to identify the object
+    private int mType; // type for the form element
+    private String mTitle; // title to be shown on left
+    private String mValue; // value to be shown on right
+    private String mHint; // value to be shown if mValue is null
+    private boolean mRequired; // value to set is the field is required
 
     private String pickerTitle; // custom title for picker
     private List<String> options; // list of options for single and multi picker
@@ -20,32 +30,69 @@ public class FormElementPickerMulti extends BaseFormElement {
 
     public static FormElementPickerMulti createInstance() {
         FormElementPickerMulti FormElementPickerMulti = new FormElementPickerMulti();
-        FormElementPickerMulti.setType(BaseFormElement.TYPE_PICKER_MULTI);
+        FormElementPickerMulti.setType(IFormElementType.TYPE_PICKER_MULTI);
         return FormElementPickerMulti;
     }
 
+    @Override
+    public int getTag() {
+        return mTag;
+    }
+
+    @Override
+    public int getType() {
+        return mType;
+    }
+
+    @Override
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @Override
+    public String getValue() {
+        return mValue;
+    }
+
+    @Override
+    public String getHint() {
+        return mHint;
+    }
+
+    @Override
+    public boolean isRequired() {
+        return mRequired;
+    }
+
     public FormElementPickerMulti setTag(int mTag) {
-        return (FormElementPickerMulti)  super.setTag(mTag);
+        this.mTag = mTag;
+        return this;
     }
 
     public FormElementPickerMulti setType(int mType) {
-        return (FormElementPickerMulti)  super.setType(mType);
+        this.mType = mType;
+        return this;
     }
 
     public FormElementPickerMulti setTitle(String mTitle) {
-        return (FormElementPickerMulti)  super.setTitle(mTitle);
+        this.mTitle = mTitle;
+        return this;
     }
 
+    @Override
     public FormElementPickerMulti setValue(String mValue) {
-        return (FormElementPickerMulti)  super.setValue(mValue);
+        this.mValue = mValue;
+        return this;
     }
 
     public FormElementPickerMulti setHint(String mHint) {
-        return (FormElementPickerMulti)  super.setHint(mHint);
+        this.mHint = mHint;
+        return this;
     }
 
     public FormElementPickerMulti setRequired(boolean required) {
-        return (FormElementPickerMulti)  super.setRequired(required);
+        mRequired = required;
+        return this;
     }
 
     // custom setters

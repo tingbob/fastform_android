@@ -1,14 +1,16 @@
 package com.tingbob.fastform.listener;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 
 import com.tingbob.fastform.adapter.FormAdapter;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 
 /**
  * Edit text listener for form element edit texts
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormItemEditTextListener implements TextWatcher {
@@ -33,15 +35,15 @@ public class FormItemEditTextListener implements TextWatcher {
     public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 
         // get current form element, existing value and new value
-        BaseFormElement baseFormElement = formAdapter.getDataset().get(position);
-        String currentValue = baseFormElement.getValue();
+        FormElementObject formElementObject = formAdapter.getDataset().get(position);
+        String currentValue = formElementObject.getValue();
         String newValue = charSequence.toString();
 
         // trigger event only if the value is changed
-        if (!currentValue.equals(newValue)) {
-            baseFormElement.setValue(newValue);
+        if (!TextUtils.isEmpty(currentValue) && !currentValue.equals(newValue)) {
+            formElementObject.setValue(newValue);
             if (formAdapter.getValueChangeListener() != null)
-                formAdapter.getValueChangeListener().onValueChanged(baseFormElement);
+                formAdapter.getValueChangeListener().onValueChanged(formElementObject);
         }
 
     }

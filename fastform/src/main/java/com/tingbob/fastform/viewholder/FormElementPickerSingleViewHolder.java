@@ -10,10 +10,11 @@ import android.view.View;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerSingle;
 
 /**
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormElementPickerSingleViewHolder extends BaseViewHolder {
@@ -21,19 +22,19 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
-    private BaseFormElement mFormElement;
+    private FormElementObject mFormElement;
     private FormElementPickerSingle mFormElementPickerSingle;
     private int mPosition;
 
     public FormElementPickerSingleViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
     }
 
     @Override
-    public void bind(final int position, BaseFormElement formElement, final Context context) {
+    public void bind(final int position, FormElementObject formElement, final Context context) {
         mFormElement = formElement;
         mPosition = position;
         mFormElementPickerSingle = (FormElementPickerSingle) mFormElement;

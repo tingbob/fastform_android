@@ -6,10 +6,11 @@ import android.view.View;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 
 /**
  * ViewHolder for Header
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormElementHeader extends BaseViewHolder {
@@ -18,11 +19,11 @@ public class FormElementHeader extends BaseViewHolder {
 
     public FormElementHeader(View v) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
     }
 
     @Override
-    public void bind(int position, BaseFormElement formElement, final Context context) {
+    public void bind(int position, FormElementObject formElement, final Context context) {
         mTextViewTitle.setText(formElement.getTitle());
     }
 

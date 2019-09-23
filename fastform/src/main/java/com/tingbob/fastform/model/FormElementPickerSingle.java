@@ -1,13 +1,23 @@
 package com.tingbob.fastform.model;
 
+import com.tingbob.fastform.IFormElementType;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Riddhi - Rudra on 28-Jul-17.
+ * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementPickerSingle extends BaseFormElement {
+public class FormElementPickerSingle implements FormElementObject<FormElementPickerSingle> {
+
+    // private variables
+    private int mTag; // unique tag to identify the object
+    private int mType; // type for the form element
+    private String mTitle; // title to be shown on left
+    private String mValue; // value to be shown on right
+    private String mHint; // value to be shown if mValue is null
+    private boolean mRequired; // value to set is the field is required
 
     private String pickerTitle; // custom title for picker
     private List<String> mOptions; // list of options for single and multi picker
@@ -18,33 +28,70 @@ public class FormElementPickerSingle extends BaseFormElement {
 
     public static FormElementPickerSingle createInstance() {
         FormElementPickerSingle formElementPickerSingle = new FormElementPickerSingle();
-        formElementPickerSingle.setType(BaseFormElement.TYPE_PICKER_SINGLE);
+        formElementPickerSingle.setType(IFormElementType.TYPE_PICKER_SINGLE);
         formElementPickerSingle.setPickerTitle("Pick one");
         return formElementPickerSingle;
     }
 
+    @Override
+    public int getTag() {
+        return mTag;
+    }
+
+    @Override
+    public int getType() {
+        return mType;
+    }
+
+    @Override
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @Override
+    public String getValue() {
+        return mValue;
+    }
+
+    @Override
+    public String getHint() {
+        return mHint;
+    }
+
+    @Override
+    public boolean isRequired() {
+        return mRequired;
+    }
+
     public FormElementPickerSingle setTag(int mTag) {
-        return (FormElementPickerSingle)  super.setTag(mTag);
+        this.mTag = mTag;
+        return this;
     }
 
     public FormElementPickerSingle setType(int mType) {
-        return (FormElementPickerSingle)  super.setType(mType);
+        this.mType = mType;
+        return this;
     }
 
     public FormElementPickerSingle setTitle(String mTitle) {
-        return (FormElementPickerSingle)  super.setTitle(mTitle);
+        this.mTitle = mTitle;
+        return this;
     }
 
+    @Override
     public FormElementPickerSingle setValue(String mValue) {
-        return (FormElementPickerSingle)  super.setValue(mValue);
+        this.mValue = mValue;
+        return this;
     }
 
     public FormElementPickerSingle setHint(String mHint) {
-        return (FormElementPickerSingle)  super.setHint(mHint);
+        this.mHint = mHint;
+        return this;
     }
 
     public FormElementPickerSingle setRequired(boolean required) {
-        return (FormElementPickerSingle)  super.setRequired(required);
+        this.mRequired = required;
+        return this;
     }
 
     // custom setters

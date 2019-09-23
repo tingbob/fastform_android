@@ -9,9 +9,10 @@ import android.view.inputmethod.InputMethodManager;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 
 /**
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
@@ -22,8 +23,8 @@ public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
 
     public FormElementTextSingleLineViewHolder(View v, FormItemEditTextListener listener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
         mFormCustomEditTextListener = listener;
         mEditTextValue.addTextChangedListener(mFormCustomEditTextListener);
         mEditTextValue.setMaxLines(1);
@@ -35,7 +36,7 @@ public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bind(int position, BaseFormElement formElement, final Context context) {
+    public void bind(int position, FormElementObject formElement, final Context context) {
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());

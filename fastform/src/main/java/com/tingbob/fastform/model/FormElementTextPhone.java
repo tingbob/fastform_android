@@ -1,42 +1,89 @@
 package com.tingbob.fastform.model;
 
+import com.tingbob.fastform.IFormElementType;
+
 /**
- * Created by Riddhi - Rudra on 28-Jul-17.
+ * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementTextPhone extends BaseFormElement {
+public class FormElementTextPhone implements FormElementObject<FormElementTextPhone> {
+
+    // private variables
+    private int mTag; // unique tag to identify the object
+    private int mType; // type for the form element
+    private String mTitle; // title to be shown on left
+    private String mValue; // value to be shown on right
+    private String mHint; // value to be shown if mValue is null
+    private boolean mRequired; // value to set is the field is required
 
     public FormElementTextPhone() {
     }
 
     public static FormElementTextPhone createInstance() {
         FormElementTextPhone FormElementTextPhone = new FormElementTextPhone();
-        FormElementTextPhone.setType(BaseFormElement.TYPE_EDITTEXT_PHONE);
+        FormElementTextPhone.setType(IFormElementType.TYPE_EDITTEXT_PHONE);
         return FormElementTextPhone;
     }
 
+    @Override
+    public int getTag() {
+        return mTag;
+    }
+
+    @Override
+    public int getType() {
+        return mType;
+    }
+
+    @Override
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @Override
+    public String getValue() {
+        return mValue;
+    }
+
+    @Override
+    public String getHint() {
+        return mHint;
+    }
+
+    @Override
+    public boolean isRequired() {
+        return mRequired;
+    }
+
     public FormElementTextPhone setTag(int mTag) {
-        return (FormElementTextPhone)  super.setTag(mTag);
+        this.mTag = mTag;
+        return this;
     }
 
     public FormElementTextPhone setType(int mType) {
-        return (FormElementTextPhone)  super.setType(mType);
+        this.mType = mType;
+        return this;
     }
 
     public FormElementTextPhone setTitle(String mTitle) {
-        return (FormElementTextPhone)  super.setTitle(mTitle);
+        this.mTitle = mTitle;
+        return this;
     }
 
+    @Override
     public FormElementTextPhone setValue(String mValue) {
-        return (FormElementTextPhone)  super.setValue(mValue);
+        this.mValue = mValue;
+        return this;
     }
 
     public FormElementTextPhone setHint(String mHint) {
-        return (FormElementTextPhone)  super.setHint(mHint);
+        this.mHint = mHint;
+        return this;
     }
 
     public FormElementTextPhone setRequired(boolean required) {
-        return (FormElementTextPhone)  super.setRequired(required);
+        this.mRequired = required;
+        return this;
     }
     
 }

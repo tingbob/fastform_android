@@ -1,10 +1,20 @@
 package com.tingbob.fastform.model;
 
+import com.tingbob.fastform.IFormElementType;
+
 /**
- * Created by Riddhi - Rudra on 28-Jul-17.
+ * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementSwitch extends BaseFormElement {
+public class FormElementSwitch implements FormElementObject<FormElementSwitch> {
+
+    // private variables
+    private int mTag; // unique tag to identify the object
+    private int mType; // type for the form element
+    private String mTitle; // title to be shown on left
+    private String mValue; // value to be shown on right
+    private String mHint; // value to be shown if mValue is null
+    private boolean mRequired; // value to set is the field is required
 
     private String positiveText; // text for right side
     private String negativeText; // text for left side
@@ -14,32 +24,69 @@ public class FormElementSwitch extends BaseFormElement {
 
     public static FormElementSwitch createInstance() {
         FormElementSwitch FormElementSwitch = new FormElementSwitch();
-        FormElementSwitch.setType(BaseFormElement.TYPE_SWITCH);
+        FormElementSwitch.setType(IFormElementType.TYPE_SWITCH);
         return FormElementSwitch;
     }
 
+    @Override
+    public int getTag() {
+        return mTag;
+    }
+
+    @Override
+    public int getType() {
+        return mType;
+    }
+
+    @Override
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @Override
+    public String getValue() {
+        return mValue;
+    }
+
+    @Override
+    public String getHint() {
+        return mHint;
+    }
+
+    @Override
+    public boolean isRequired() {
+        return mRequired;
+    }
+
     public FormElementSwitch setTag(int mTag) {
-        return (FormElementSwitch)  super.setTag(mTag);
+        this.mTag = mTag;
+        return this;
     }
 
     public FormElementSwitch setType(int mType) {
-        return (FormElementSwitch)  super.setType(mType);
+        this.mType = mType;
+        return this;
     }
 
     public FormElementSwitch setTitle(String mTitle) {
-        return (FormElementSwitch)  super.setTitle(mTitle);
+        this.mTitle = mTitle;
+        return this;
     }
 
+    @Override
     public FormElementSwitch setValue(String mValue) {
-        return (FormElementSwitch)  super.setValue(mValue);
+        this.mValue = mValue;
+        return this;
     }
 
     public FormElementSwitch setHint(String mHint) {
-        return (FormElementSwitch)  super.setHint(mHint);
+        this.mHint = mHint;
+        return this;
     }
 
     public FormElementSwitch setRequired(boolean required) {
-        return (FormElementSwitch)  super.setRequired(required);
+        this.mRequired = required;
+        return this;
     }
 
     // custom setters

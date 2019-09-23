@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.tingbob.fastform.FormBuilder;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
-import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerDate;
 import com.tingbob.fastform.model.FormElementPickerMulti;
 import com.tingbob.fastform.model.FormElementPickerSingle;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormElementPickerMulti element42 = FormElementPickerMulti.createInstance().setTitle("Multi Items").setOptions(fruits).setPickerTitle("Pick one or more").setNegativeText("reset");
         FormElementSwitch element43 = FormElementSwitch.createInstance().setTitle("Frozen?").setSwitchTexts("Yes", "No");
 
-        List<BaseFormElement> formItems = new ArrayList<>();
+        List<FormElementObject> formItems = new ArrayList<>();
         formItems.add(header1);
         formItems.add(element11);
         formItems.add(element12);
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     }
 
     @Override
-    public void onValueChanged(BaseFormElement formElement) {
+    public void onValueChanged(FormElementObject formElement) {
         Toast.makeText(this, formElement.getValue(), Toast.LENGTH_SHORT).show();
     }
 }

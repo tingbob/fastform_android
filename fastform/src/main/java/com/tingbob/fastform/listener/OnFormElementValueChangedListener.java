@@ -1,6 +1,6 @@
 package com.tingbob.fastform.listener;
 
-import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 
 /**
  * Callback to activity when any data in form adapter is changed
@@ -8,6 +8,6 @@ import com.tingbob.fastform.model.BaseFormElement;
 
 public interface OnFormElementValueChangedListener {
 
-    void onValueChanged(BaseFormElement baseFormElement);
+    void onValueChanged(FormElementObject baseFormElement);
 
 }

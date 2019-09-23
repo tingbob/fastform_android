@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TimePicker;
 
@@ -14,10 +15,11 @@ import java.util.Locale;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerTime;
 
 /**
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormElementPickerTimeViewHolder extends BaseViewHolder {
@@ -27,13 +29,13 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
     private TimePickerDialog mTimePickerDialog;
     private Calendar mCalendarCurrentTime;
     private ReloadListener mReloadListener;
-    private BaseFormElement mFormElement;
+    private FormElementObject mFormElement;
     private int mPosition;
 
     public FormElementPickerTimeViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
         mCalendarCurrentTime = Calendar.getInstance();
         mTimePickerDialog = new TimePickerDialog(context,
@@ -44,7 +46,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bind(int position, BaseFormElement formElement, final Context context) {
+    public void bind(int position, FormElementObject formElement, final Context context) {
         mFormElement = formElement;
         mPosition = position;
 
@@ -84,7 +86,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
             String newValue = sdfTime.format(mCalendarCurrentTime.getTime());
 
             // trigger event only if the value is changed
-            if (!currentValue.equals(newValue)) {
+            if (!TextUtils.isEmpty(currentValue) && !currentValue.equals(newValue)) {
                 mReloadListener.updateValue(mPosition, newValue);
             }
         }

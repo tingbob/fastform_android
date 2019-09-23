@@ -12,10 +12,11 @@ import java.util.ArrayList;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.BaseFormElement;
+import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerMulti;
 
 /**
- * Created by Riddhi - Rudra on 30-Jul-17.
+ * Created by tingbob  on 30-Jul-17.
  */
 
 public class FormElementPickerMultiViewHolder extends BaseViewHolder {
@@ -23,19 +24,19 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
-    private BaseFormElement mFormElement;
+    private FormElementObject mFormElement;
     private FormElementPickerMulti mFormElementPickerMulti;
     private int mPosition;
 
     public FormElementPickerMultiViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
-        mTextViewTitle = (AppCompatTextView) v.findViewById(R.id.formElementTitle);
-        mEditTextValue = (AppCompatEditText) v.findViewById(R.id.formElementValue);
+        mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
     }
 
     @Override
-    public void bind(final int position, BaseFormElement formElement, final Context context) {
+    public void bind(final int position, FormElementObject formElement, final Context context) {
         mFormElement = formElement;
         mPosition = position;
         mFormElementPickerMulti = (FormElementPickerMulti) mFormElement;
