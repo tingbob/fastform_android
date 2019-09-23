@@ -19,13 +19,11 @@ public class FormHeader implements FormElementObject<FormHeader> {
 
     /**
      * static method to create instance with title
-     * @param title
      * @return
      */
-    public static FormHeader createInstance(String title) {
+    public static FormHeader createInstance() {
         FormHeader formHeader = new FormHeader();
         formHeader.setType(IFormElementType.TYPE_HEADER);
-        formHeader.setTitle(title);
         return formHeader;
     }
 

@@ -55,21 +55,21 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         mRecyclerView = findViewById(R.id.recyclerView);
         mFormBuilder = new FormBuilder(this, mRecyclerView, this);
 
-        FormHeader header1 = FormHeader.createInstance("Personal Info");
+        FormHeader header1 = FormHeader.createInstance().setTitle("Personal Info");
         FormElementTextEmail element11 = FormElementTextEmail.createInstance().setTitle("Email").setHint("Enter Email");
         FormElementTextPhone element12 = FormElementTextPhone.createInstance().setTitle("Phone").setValue("+8801712345678");
 
-        FormHeader header2 = FormHeader.createInstance("Family Info");
+        FormHeader header2 = FormHeader.createInstance().setTitle("Family Info");
         FormElementTextSingleLine element21 = FormElementTextSingleLine.createInstance().setTitle("Location").setValue("Dhaka");
         FormElementTextMultiLine element22 = FormElementTextMultiLine.createInstance().setTitle("Address");
         FormElementTextNumber element23 = FormElementTextNumber.createInstance().setTitle("Zip Code").setValue("1000");
 
-        FormHeader header3 = FormHeader.createInstance("Schedule");
+        FormHeader header3 = FormHeader.createInstance().setTitle("Schedule");
         FormElementPickerDate element31 = FormElementPickerDate.createInstance().setTitle("Date").setDateFormat("MMM dd, yyyy");
         FormElementPickerTime element32 = FormElementPickerTime.createInstance().setTitle("Time").setTimeFormat("KK hh");
         FormElementTextPassword element33 = FormElementTextPassword.createInstance().setTitle("Password").setValue("abcd1234");
 
-        FormHeader header4 = FormHeader.createInstance("Preferred Items");
+        FormHeader header4 = FormHeader.createInstance().setTitle("Preferred Items");
         List<String> fruits = new ArrayList<>();
         fruits.add("Banana");
         fruits.add("Orange");

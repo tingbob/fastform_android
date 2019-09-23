@@ -83,7 +83,7 @@ public class FormBuilder {
      * @param tag
      * @return
      */
-    public FormElementObject getFormElement(int tag) {
+    public FormElementObject getFormElement(String tag) {
         return this.mFormAdapter.getValueAtTag(tag);
     }
 
