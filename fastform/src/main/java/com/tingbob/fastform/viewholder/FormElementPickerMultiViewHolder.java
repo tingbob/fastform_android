@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerMulti;
 
@@ -21,6 +20,7 @@ import com.tingbob.fastform.model.FormElementPickerMulti;
 
 public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
+    private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
@@ -30,6 +30,7 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
     public FormElementPickerMultiViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
+        mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
@@ -41,6 +42,7 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
         mPosition = position;
         mFormElementPickerMulti = (FormElementPickerMulti) mFormElement;
 
+        mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());

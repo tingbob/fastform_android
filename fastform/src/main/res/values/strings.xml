@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">fastform</string>
+    <string name="element_required">*</string>
 </resources>

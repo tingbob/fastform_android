@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerSingle;
 
@@ -19,6 +18,7 @@ import com.tingbob.fastform.model.FormElementPickerSingle;
 
 public class FormElementPickerSingleViewHolder extends BaseViewHolder {
 
+    private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
     private ReloadListener mReloadListener;
@@ -28,6 +28,7 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
 
     public FormElementPickerSingleViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
+        mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
@@ -39,6 +40,7 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
         mPosition = position;
         mFormElementPickerSingle = (FormElementPickerSingle) mFormElement;
 
+        mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());

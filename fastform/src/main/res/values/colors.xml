@@ -6,4 +6,5 @@
     <color name="colorFormMasterElementTextTitle">#000000</color>
     <color name="colorFormMasterElementTextValue">#000000</color>
     <color name="colorFormMasterDivider">#d7d7d7</color>
+    <color name="colorFormMasterRequired">@android:color/holo_red_light</color>
 </resources>

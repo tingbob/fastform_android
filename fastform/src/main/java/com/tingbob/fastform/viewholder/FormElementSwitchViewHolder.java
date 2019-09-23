@@ -8,7 +8,6 @@ import android.widget.CompoundButton;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementSwitch;
 
@@ -18,6 +17,7 @@ import com.tingbob.fastform.model.FormElementSwitch;
 
 public class FormElementSwitchViewHolder extends BaseViewHolder {
 
+    private AppCompatTextView mTextViewRequired;
     public AppCompatTextView mTextViewTitle, mTextViewPositive, mTextViewNegative;
     public SwitchCompat mSwitch;
     private ReloadListener mReloadListener;
@@ -27,6 +27,7 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
 
     public FormElementSwitchViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
+        mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mTextViewPositive = v.findViewById(R.id.formElementPositiveText);
         mTextViewNegative = v.findViewById(R.id.formElementNegativeText);
@@ -40,6 +41,7 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
         mPosition = position;
         mFormElementSwitch = (FormElementSwitch) mFormElement;
 
+        mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(mFormElementSwitch.getTitle());
         mTextViewPositive.setText(mFormElementSwitch.getPositiveText());
         mTextViewNegative.setHint(mFormElementSwitch.getNegativeText());

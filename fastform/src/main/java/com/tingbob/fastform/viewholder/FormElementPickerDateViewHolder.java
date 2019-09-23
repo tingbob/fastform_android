@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 
@@ -14,7 +13,6 @@ import java.util.Locale;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerDate;
 
@@ -25,6 +23,7 @@ import com.tingbob.fastform.model.FormElementPickerDate;
 
 public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
+    private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
     private DatePickerDialog mDatePickerDialog;
@@ -35,6 +34,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
     public FormElementPickerDateViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
+        mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mEditTextValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
@@ -52,6 +52,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
                 mCalendarCurrentDate.get(Calendar.MONTH),
                 mCalendarCurrentDate.get(Calendar.DAY_OF_MONTH));
 
+        mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());

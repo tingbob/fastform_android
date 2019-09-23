@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         mFormBuilder = new FormBuilder(this, mRecyclerView, this);
 
         FormHeader header1 = FormHeader.createInstance().setTitle("Personal Info");
-        FormElementTextEmail element11 = FormElementTextEmail.createInstance().setTitle("Email").setHint("Enter Email");
-        FormElementTextPhone element12 = FormElementTextPhone.createInstance().setTitle("Phone").setValue("+8801712345678");
+        FormElementTextEmail element11 = FormElementTextEmail.createInstance().setTitle("Email").setHint("Enter Email").setRequired(true);
+        FormElementTextPhone element12 = FormElementTextPhone.createInstance().setTitle("Phone").setValue("+8801712345678").setRequired(true);
 
         FormHeader header2 = FormHeader.createInstance().setTitle("Family Info");
-        FormElementTextSingleLine element21 = FormElementTextSingleLine.createInstance().setTitle("Location").setValue("Dhaka");
+        FormElementTextSingleLine element21 = FormElementTextSingleLine.createInstance().setTitle("Location").setValue("Dhaka").setRequired(true);
         FormElementTextMultiLine element22 = FormElementTextMultiLine.createInstance().setTitle("Address");
         FormElementTextNumber element23 = FormElementTextNumber.createInstance().setTitle("Zip Code").setValue("1000");
 

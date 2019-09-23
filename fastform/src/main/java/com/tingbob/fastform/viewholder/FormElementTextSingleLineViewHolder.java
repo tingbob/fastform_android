@@ -17,12 +17,14 @@ import com.tingbob.fastform.model.FormElementObject;
 
 public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
 
+    private AppCompatTextView mTextViewRequired;
     public AppCompatTextView mTextViewTitle;
     public AppCompatEditText mEditTextValue;
     public FormItemEditTextListener mFormCustomEditTextListener;
 
     public FormElementTextSingleLineViewHolder(View v, FormItemEditTextListener listener) {
         super(v);
+        mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mEditTextValue = v.findViewById(R.id.formElementValue);
         mFormCustomEditTextListener = listener;
@@ -37,6 +39,7 @@ public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
 
     @Override
     public void bind(int position, FormElementObject formElement, final Context context) {
+        mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());

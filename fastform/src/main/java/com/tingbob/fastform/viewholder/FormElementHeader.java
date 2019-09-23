@@ -5,7 +5,6 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import com.tingbob.fastform.R;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 
 /**
