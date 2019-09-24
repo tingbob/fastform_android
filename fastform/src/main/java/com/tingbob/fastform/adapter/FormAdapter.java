@@ -289,19 +289,27 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         }
 
         // gets current object
-        FormElementObject currentObject = mDataset.get(position);
-        if (currentObject instanceof FormElementTextNumberStatistic) {
-            FormElementTextNumberStatistic formStatistic = (FormElementTextNumberStatistic)currentObject;
-            int statistic = 0;
-            if (formStatistic.getStatisticTags() != null) {
-                for (String tag : formStatistic.getStatisticTags()) {
-                    String value = getValueAtTag(tag);
-                    statistic += TextUtils.isEmpty(value) ? 0 : Integer.valueOf(value);
-                }
-            }
-            formStatistic.setValue(String.valueOf(statistic));
-        }
+        FormElementObject currentObject = getElement(position);
+
+        // set statistic value
+        setStatisticValue(currentObject);
+
         holder.bind(position, currentObject, mContext);
+    }
+
+    public void setStatisticValue(FormElementObject currentObject) {
+        if (!(currentObject instanceof FormElementTextNumberStatistic)) {
+            return;
+        }
+        FormElementTextNumberStatistic formStatistic = (FormElementTextNumberStatistic)currentObject;
+        int statistic = 0;
+        if (formStatistic.getStatisticTags() != null) {
+            for (String tag : formStatistic.getStatisticTags()) {
+                String value = getValueAtTag(tag);
+                statistic += TextUtils.isEmpty(value) ? 0 : Integer.valueOf(value);
+            }
+        }
+        formStatistic.setValue(String.valueOf(statistic));
     }
 
     /**
