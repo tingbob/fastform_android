@@ -16,9 +16,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:padding="15dp"
-            android:layout_weight="1">
+            android:padding="15dp" >
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,30 +39,18 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linear_time_picker"
+        <android.support.v7.widget.AppCompatEditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:padding="15dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_time_picker" />
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@null"
             android:textSize="@dimen/elementTextValueSize"
-            android:gravity="right"
+            android:gravity="start"
             android:id="@+id/formElementValue"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
             tools:text="tingbob"
+            android:imeOptions="actionNext"
             android:padding="15dp"
             android:textColor="@color/colorFormMasterElementTextValue"/>
 

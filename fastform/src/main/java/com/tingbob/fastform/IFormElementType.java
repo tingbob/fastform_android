@@ -14,4 +14,5 @@ public interface IFormElementType {
     int TYPE_PICKER_SINGLE = 9;
     int TYPE_PICKER_MULTI = 10;
     int TYPE_SWITCH = 11;
+    int TYPE_NUMBER_STATISTIC = 12;
 }

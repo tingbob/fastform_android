@@ -2,11 +2,13 @@ package com.tingbob.fastform.model;
 
 import com.tingbob.fastform.IFormElementType;
 
+import java.util.List;
+
 /**
  * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementTextNumber implements FormElementObject<FormElementTextNumber> {
+public class FormElementTextNumberStatistic implements FormElementObject<FormElementTextNumberStatistic> {
 
     // private variables
     private String mTag; // unique tag to identify the object
@@ -15,15 +17,15 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
     private String mValue; // value to be shown on right
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
-    private String mRelatedStatisticTag;
+    private List<String> mStatisticTags;
 
-    public FormElementTextNumber() {
+    public FormElementTextNumberStatistic() {
     }
 
-    public static FormElementTextNumber createInstance() {
-        FormElementTextNumber FormElementTextNumber = new FormElementTextNumber();
-        FormElementTextNumber.setType(IFormElementType.TYPE_EDITTEXT_NUMBER);
-        return FormElementTextNumber;
+    public static FormElementTextNumberStatistic createInstance() {
+        FormElementTextNumberStatistic FormElementTextNumberStatistic = new FormElementTextNumberStatistic();
+        FormElementTextNumberStatistic.setType(IFormElementType.TYPE_NUMBER_STATISTIC);
+        return FormElementTextNumberStatistic;
     }
 
     @Override
@@ -56,43 +58,43 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
         return mRequired;
     }
 
-    public FormElementTextNumber setTag(String mTag) {
+    public FormElementTextNumberStatistic setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
-    public FormElementTextNumber setType(int mType) {
+    public FormElementTextNumberStatistic setType(int mType) {
         this.mType = mType;
         return this;
     }
 
-    public FormElementTextNumber setTitle(String mTitle) {
+    public FormElementTextNumberStatistic setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
     }
 
     @Override
-    public FormElementTextNumber setValue(String mValue) {
+    public FormElementTextNumberStatistic setValue(String mValue) {
         this.mValue = mValue;
         return this;
     }
 
-    public FormElementTextNumber setHint(String mHint) {
+    public FormElementTextNumberStatistic setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
-    public FormElementTextNumber setRequired(boolean required) {
+    public FormElementTextNumberStatistic setRequired(boolean required) {
         this.mRequired = required;
         return this;
     }
 
-    public String getRelatedStatisticTag() {
-        return mRelatedStatisticTag;
+    public List<String> getStatisticTags() {
+        return mStatisticTags;
     }
 
-    public FormElementTextNumber setRelatedStatisticTag(String tag) {
-        this.mRelatedStatisticTag = tag;
+    public FormElementTextNumberStatistic setStatisticTags(List<String> list) {
+        this.mStatisticTags = list;
         return this;
     }
     

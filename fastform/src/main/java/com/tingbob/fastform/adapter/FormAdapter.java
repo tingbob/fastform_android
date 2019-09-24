@@ -2,6 +2,7 @@ package com.tingbob.fastform.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.tingbob.fastform.listener.FormItemEditTextListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormElementTextNumber;
+import com.tingbob.fastform.model.FormElementTextNumberStatistic;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
 import com.tingbob.fastform.viewholder.FormElementPickerDateViewHolder;
@@ -24,6 +27,7 @@ import com.tingbob.fastform.viewholder.FormElementPickerTimeViewHolder;
 import com.tingbob.fastform.viewholder.FormElementSwitchViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextEmailViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextMultiLineViewHolder;
+import com.tingbob.fastform.viewholder.FormElementTextNumberStatisticViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextNumberViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPasswordViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPhoneViewHolder;
@@ -56,6 +60,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      */
     public void addElements(List<FormElementObject> formObjects) {
         this.mDataset = formObjects;
+        updateRelatedStatisticTags();
         notifyDataSetChanged();
     }
 
@@ -95,20 +100,19 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     }
 
     /**
-     * get value of any element by tag
-     * @param index
+     * get element by position
+     * @param position
      * @return
      */
-    public FormElementObject getValueAtIndex(int index) {
-        return (mDataset.get(index));
+
+    public FormElementObject getElement(int position) {
+        if (mDataset.isEmpty()) {
+            return null;
+        }
+        return mDataset.get(position);
     }
 
-    /**
-     * get value of any element by tag
-     * @param tag
-     * @return
-     */
-    public FormElementObject getValueAtTag(String tag) {
+    public FormElementObject getElementByTag(String tag) {
         for (FormElementObject f : this.mDataset) {
             if (f.getTag().equals(tag)) {
                 return f;
@@ -116,6 +120,66 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         }
 
         return null;
+    }
+
+    public int getPositionByTag(String tag) {
+        int pos;
+        for (pos = 0; pos < getItemCount(); pos++) {
+            FormElementObject f = getElement(pos);
+            if (f.getTag().equals(tag)) {
+                break;
+            }
+        }
+        return pos;
+    }
+
+    /**
+     * get value of any element by tag
+     * @param index
+     * @return
+     */
+    public String getValueAtIndex(int index) {
+        FormElementObject elementObject = getElement(index);
+        if (elementObject != null) {
+            return elementObject.getValue();
+        }
+        return null;
+    }
+
+    /**
+     * get value of any element by tag
+     * @param tag
+     * @return
+     */
+    public String getValueAtTag(String tag) {
+        FormElementObject elementObject = getElementByTag(tag);
+        if (elementObject != null) {
+            return elementObject.getValue();
+        }
+        return null;
+    }
+
+    /**
+     * set related statistic text number
+     *
+     */
+    public void updateRelatedStatisticTags() {
+        for (FormElementObject f : this.mDataset) {
+            if (f instanceof FormElementTextNumberStatistic) {
+                FormElementTextNumberStatistic statistic = (FormElementTextNumberStatistic)f;
+                if (statistic.getStatisticTags() != null) {
+                    for (String tag : statistic.getStatisticTags()) {
+                        FormElementTextNumber textNumber = (FormElementTextNumber)getElementByTag(tag);
+                        textNumber.setRelatedStatisticTag(statistic.getTag());
+                    }
+                }
+            }
+        }
+    }
+
+    public void updateValueStatistic(String tag) {
+        int pos = getPositionByTag(tag);
+        notifyItemChanged(pos);
     }
 
     /**
@@ -176,7 +240,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextMultiLineViewHolder(v, new FormItemEditTextListener(this));
             case IFormElementType.TYPE_EDITTEXT_NUMBER:
-                v = inflater.inflate(R.layout.form_element, parent, false);
+                v = inflater.inflate(R.layout.form_element_number, parent, false);
                 return new FormElementTextNumberViewHolder(v, new FormItemEditTextListener(this));
             case IFormElementType.TYPE_EDITTEXT_EMAIL:
                 v = inflater.inflate(R.layout.form_element, parent, false);
@@ -202,6 +266,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             case IFormElementType.TYPE_SWITCH:
                 v = inflater.inflate(R.layout.form_element_switch, parent, false);
                 return new FormElementSwitchViewHolder(v, mContext, this);
+            case IFormElementType.TYPE_NUMBER_STATISTIC:
+                v = inflater.inflate(R.layout.form_element_number_statistic, parent, false);
+                return new FormElementTextNumberStatisticViewHolder(v,new FormItemEditTextListener(this));
             default:
                 v = inflater.inflate(R.layout.form_element, parent, false);
                 return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
@@ -223,6 +290,17 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
 
         // gets current object
         FormElementObject currentObject = mDataset.get(position);
+        if (currentObject instanceof FormElementTextNumberStatistic) {
+            FormElementTextNumberStatistic formStatistic = (FormElementTextNumberStatistic)currentObject;
+            int statistic = 0;
+            if (formStatistic.getStatisticTags() != null) {
+                for (String tag : formStatistic.getStatisticTags()) {
+                    String value = getValueAtTag(tag);
+                    statistic += TextUtils.isEmpty(value) ? 0 : Integer.valueOf(value);
+                }
+            }
+            formStatistic.setValue(String.valueOf(statistic));
+        }
         holder.bind(position, currentObject, mContext);
     }
 

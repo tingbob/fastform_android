@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import com.tingbob.fastform.adapter.FormAdapter;
 import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormElementTextNumber;
 
 /**
  * Edit text listener for form element edit texts
@@ -42,8 +43,13 @@ public class FormItemEditTextListener implements TextWatcher {
         // trigger event only if the value is changed
         if (!currentValue.equals(newValue)) {
             formElementObject.setValue(newValue);
-            if (formAdapter.getValueChangeListener() != null)
+            if (formElementObject instanceof FormElementTextNumber) {
+                FormElementTextNumber textNumber = (FormElementTextNumber)formElementObject;
+                formAdapter.updateValueStatistic(textNumber.getRelatedStatisticTag());
+            }
+            if (formAdapter.getValueChangeListener() != null) {
                 formAdapter.getValueChangeListener().onValueChanged(formElementObject);
+            }
         }
 
     }

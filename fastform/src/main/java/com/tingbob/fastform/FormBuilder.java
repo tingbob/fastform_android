@@ -84,7 +84,7 @@ public class FormBuilder {
      * @return
      */
     public FormElementObject getFormElement(String tag) {
-        return this.mFormAdapter.getValueAtTag(tag);
+        return this.mFormAdapter.getElementByTag(tag);
     }
 
     /**
@@ -95,12 +95,11 @@ public class FormBuilder {
      */
     public boolean isValidForm() {
         for (int i = 0; i < this.mFormAdapter.getItemCount(); i++) {
-            FormElementObject formElementObject = this.mFormAdapter.getValueAtIndex(i);
+            FormElementObject formElementObject = this.mFormAdapter.getElement(i);
             if (formElementObject.isRequired() && TextUtils.isEmpty(formElementObject.getValue())) {
                 return false;
             }
         }
         return true;
     }
-
 }
