@@ -25,6 +25,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
     private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
     private AppCompatEditText mEditTextValue;
+    private View mTimePickerButton;
     private TimePickerDialog mTimePickerDialog;
     private Calendar mCalendarCurrentTime;
     private ReloadListener mReloadListener;
@@ -36,6 +37,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTimePickerButton = v.findViewById(R.id.linear_time_picker);
         mReloadListener = reloadListener;
         mCalendarCurrentTime = Calendar.getInstance();
         mTimePickerDialog = new TimePickerDialog(context,
@@ -56,14 +58,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
         mEditTextValue.setHint(formElement.getHint());
         mEditTextValue.setFocusableInTouchMode(false);
 
-        mEditTextValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTimePickerDialog.show();
-            }
-        });
-
-        mTextViewTitle.setOnClickListener(new View.OnClickListener() {
+        mTimePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mTimePickerDialog.show();

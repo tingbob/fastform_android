@@ -40,7 +40,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_date_picker"
+            android:id="@+id/linear_time_picker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -48,7 +48,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_date_picker" />
+                android:src="@drawable/ic_time_picker" />
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatEditText
