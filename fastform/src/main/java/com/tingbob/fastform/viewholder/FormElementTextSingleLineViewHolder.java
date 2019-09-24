@@ -3,12 +3,12 @@ package com.tingbob.fastform.viewholder;
 import android.content.Context;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 
 /**
@@ -30,6 +30,7 @@ public class FormElementTextSingleLineViewHolder extends BaseViewHolder {
         mFormCustomEditTextListener = listener;
         mEditTextValue.addTextChangedListener(mFormCustomEditTextListener);
         mEditTextValue.setMaxLines(1);
+        mEditTextValue.setEllipsize(TextUtils.TruncateAt.END);
     }
 
     @Override

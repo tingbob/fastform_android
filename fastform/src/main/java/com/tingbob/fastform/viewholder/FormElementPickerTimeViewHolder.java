@@ -2,7 +2,6 @@ package com.tingbob.fastform.viewholder;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.TimePicker;
@@ -24,7 +23,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
-    private AppCompatEditText mEditTextValue;
+    private AppCompatTextView mTextViewValue;
     private View mTimePickerButton;
     private TimePickerDialog mTimePickerDialog;
     private Calendar mCalendarCurrentTime;
@@ -36,7 +35,7 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
         super(v);
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTextViewValue = v.findViewById(R.id.formElementValue);
         mTimePickerButton = v.findViewById(R.id.linear_time_picker);
         mReloadListener = reloadListener;
         mCalendarCurrentTime = Calendar.getInstance();
@@ -54,9 +53,8 @@ public class FormElementPickerTimeViewHolder extends BaseViewHolder {
 
         mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mEditTextValue.setFocusableInTouchMode(false);
+        mTextViewValue.setText(formElement.getValue());
+        mTextViewValue.setHint(formElement.getHint());
 
         mTimePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,7 +2,6 @@ package com.tingbob.fastform.viewholder;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.DatePicker;
@@ -25,7 +24,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
-    private AppCompatEditText mEditTextValue;
+    private AppCompatTextView mTextViewValue;
     private View mDatePickerButton;
     private DatePickerDialog mDatePickerDialog;
     private Calendar mCalendarCurrentDate;
@@ -37,7 +36,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
         super(v);
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTextViewValue = v.findViewById(R.id.formElementValue);
         mDatePickerButton = v.findViewById(R.id.linear_date_picker);
         mReloadListener = reloadListener;
         mCalendarCurrentDate = Calendar.getInstance();
@@ -56,9 +55,8 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
         mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mEditTextValue.setFocusableInTouchMode(false);
+        mTextViewValue.setText(formElement.getValue());
+        mTextViewValue.setHint(formElement.getHint());
 
         mDatePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override

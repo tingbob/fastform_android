@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
-import com.tingbob.fastform.model.BaseFormElement;
 import com.tingbob.fastform.model.FormElementObject;
 
 /**
@@ -44,6 +43,7 @@ public class FormElementTextNumberViewHolder extends BaseViewHolder {
         mTextViewTitle.setText(formElement.getTitle());
         mEditTextValue.setText(formElement.getValue());
         mEditTextValue.setHint(formElement.getHint());
+
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
