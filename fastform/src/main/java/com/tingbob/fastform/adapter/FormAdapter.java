@@ -14,13 +14,16 @@ import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementTextNumber;
 import com.tingbob.fastform.model.FormElementTextNumberStatistic;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
 import com.tingbob.fastform.viewholder.FormElementPickerDateViewHolder;
+import com.tingbob.fastform.viewholder.FormElementPickerImageMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerSingleViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerTimeViewHolder;
@@ -43,15 +46,25 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private Context mContext;
     private List<FormElementObject> mDataset;
     private OnFormElementValueChangedListener mListener;
+    public OnImageClickListener onImageClickListener;
 
     /**
      * public constructor with context
      * @param context
      */
-    public FormAdapter(Context context, OnFormElementValueChangedListener listener) {
-        mContext = context;
-        mListener = listener;
-        mDataset = new ArrayList<>();
+    public FormAdapter(Context context,
+                       OnFormElementValueChangedListener listener) {
+        this.mContext = context;
+        this.mListener = listener;
+        this.mDataset = new ArrayList<>();
+    }
+
+    public void setOnFormElementValueChangeListener(OnFormElementValueChangedListener onFormElementValueChangeListener) {
+        this.mListener = onFormElementValueChangeListener;
+    }
+
+    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
+        this.onImageClickListener = onImageClickListener;
     }
 
     /**
@@ -230,48 +243,64 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v;
         switch (viewType) {
-            case IFormElementType.TYPE_HEADER:
-                v = inflater.inflate(R.layout.form_element_header, parent, false);
-                return new FormElementHeader(v);
-            case IFormElementType.TYPE_EDITTEXT_TEXT_SINGLELINE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
-            case IFormElementType.TYPE_EDITTEXT_TEXT_MULTILINE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementTextMultiLineViewHolder(v, new FormItemEditTextListener(this));
-            case IFormElementType.TYPE_EDITTEXT_NUMBER:
-                v = inflater.inflate(R.layout.form_element_number, parent, false);
-                return new FormElementTextNumberViewHolder(v, new FormItemEditTextListener(this));
-            case IFormElementType.TYPE_EDITTEXT_EMAIL:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementTextEmailViewHolder(v, new FormItemEditTextListener(this));
-            case IFormElementType.TYPE_EDITTEXT_PHONE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementTextPhoneViewHolder(v, new FormItemEditTextListener(this));
-            case IFormElementType.TYPE_EDITTEXT_PASSWORD:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementTextPasswordViewHolder(v, new FormItemEditTextListener(this));
-            case IFormElementType.TYPE_PICKER_DATE:
-                v = inflater.inflate(R.layout.form_element_date_picker, parent, false);
-                return new FormElementPickerDateViewHolder(v, mContext, this);
-            case IFormElementType.TYPE_PICKER_TIME:
-                v = inflater.inflate(R.layout.form_element_time_picker, parent, false);
-                return new FormElementPickerTimeViewHolder(v, mContext, this);
-            case IFormElementType.TYPE_PICKER_SINGLE:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementPickerSingleViewHolder(v, mContext, this);
-            case IFormElementType.TYPE_PICKER_MULTI:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementPickerMultiViewHolder(v, mContext, this);
-            case IFormElementType.TYPE_SWITCH:
-                v = inflater.inflate(R.layout.form_element_switch, parent, false);
-                return new FormElementSwitchViewHolder(v, mContext, this);
-            case IFormElementType.TYPE_NUMBER_STATISTIC:
-                v = inflater.inflate(R.layout.form_element_number_statistic, parent, false);
-                return new FormElementTextNumberStatisticViewHolder(v,new FormItemEditTextListener(this));
+            case IFormElementType.TYPE_HEADER: {
+                return new FormElementHeader(inflater.inflate(R.layout.form_element_header, parent, false));
+            }
+            case IFormElementType.TYPE_EDITTEXT_TEXT_SINGLELINE: {
+                return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_EDITTEXT_TEXT_MULTILINE: {
+                return new FormElementTextMultiLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_EDITTEXT_NUMBER: {
+                return new FormElementTextNumberViewHolder(inflater.inflate(R.layout.form_element_number, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_EDITTEXT_EMAIL: {
+                return new FormElementTextEmailViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_EDITTEXT_PHONE: {
+                return new FormElementTextPhoneViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_EDITTEXT_PASSWORD: {
+                return new FormElementTextPasswordViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_PICKER_DATE: {
+                return new FormElementPickerDateViewHolder(inflater.inflate(R.layout.form_element_date_picker, parent, false),
+                        mContext, this);
+            }
+            case IFormElementType.TYPE_PICKER_TIME: {
+                return new FormElementPickerTimeViewHolder(inflater.inflate(R.layout.form_element_time_picker, parent, false),
+                        mContext, this);
+            }
+            case IFormElementType.TYPE_PICKER_SINGLE: {
+                return new FormElementPickerSingleViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        mContext, this);
+            }
+            case IFormElementType.TYPE_PICKER_MULTI: {
+                return new FormElementPickerMultiViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        mContext, this);
+            }
+            case IFormElementType.TYPE_SWITCH: {
+                return new FormElementSwitchViewHolder(inflater.inflate(R.layout.form_element_switch, parent, false),
+                        mContext, this);
+            }
+            case IFormElementType.TYPE_NUMBER_STATISTIC: {
+                return new FormElementTextNumberStatisticViewHolder(inflater.inflate(R.layout.form_element_number_statistic, parent, false),
+                        new FormItemEditTextListener(this));
+            }
+            case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
+                return new FormElementPickerImageMultiViewHolder(inflater.inflate(R.layout.form_element_imageview_multiple_picker, parent, false),
+                        onImageClickListener);
+            }
             default:
-                v = inflater.inflate(R.layout.form_element, parent, false);
-                return new FormElementTextSingleLineViewHolder(v, new FormItemEditTextListener(this));
+                return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                        new FormItemEditTextListener(this));
         }
     }
 
@@ -323,6 +352,15 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         notifyDataSetChanged();
         if (mListener != null)
             mListener.onValueChanged(mDataset.get(position));
+    }
+
+    public void updateImagePaths(String tag, List<String> imagePaths) {
+        if (imagePaths == null || imagePaths.isEmpty()) {
+            return;
+        }
+        FormElementPickerImageMultiple formElement = (FormElementPickerImageMultiple)getElementByTag(tag);
+        formElement.setListValue(imagePaths);
+        notifyItemChanged(getPositionByTag(tag));
     }
 
 }

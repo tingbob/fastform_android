@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 import com.tingbob.fastform.FormBuilder;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerDate;
+import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementPickerMulti;
 import com.tingbob.fastform.model.FormElementPickerSingle;
 import com.tingbob.fastform.model.FormElementPickerTime;
@@ -26,7 +28,8 @@ import com.tingbob.fastform.model.FormHeader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener {
+public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
+        OnImageClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -85,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormElementPickerMulti element42 = FormElementPickerMulti.createInstance().setTag("42").setTitle("Multi Items").setOptions(fruits).setPickerTitle("Pick one or more").setNegativeText("reset");
         FormElementSwitch element43 = FormElementSwitch.createInstance().setTag("43").setTitle("Frozen?").setSwitchTexts("Yes", "No");
 
+        FormElementPickerImageMultiple element51 = FormElementPickerImageMultiple.createInstance().setTag("51").setTitle("Image Picker");
+        mFormBuilder.setOnImageClickListener(this);
+
         List<FormElementObject> formItems = new ArrayList<>();
         formItems.add(header1);
         formItems.add(element11);
@@ -103,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         formItems.add(element41);
         formItems.add(element42);
         formItems.add(element43);
+        formItems.add(element51);
         mFormBuilder.addFormElements(formItems);
 
     }
@@ -110,5 +117,10 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     @Override
     public void onValueChanged(FormElementObject formElement) {
         Toast.makeText(this, formElement.getValue(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onImageClick(String tag, String imagePath, boolean bAddBtn) {
+        Toast.makeText(this, "tag = " + tag + " bAddBtn = " + bAddBtn, Toast.LENGTH_SHORT).show();
     }
 }

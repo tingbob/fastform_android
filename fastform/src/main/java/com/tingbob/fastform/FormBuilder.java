@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.tingbob.fastform.adapter.FormAdapter;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 
 /** Wrapper class around the adapter to assist in building form
@@ -70,6 +71,14 @@ public class FormBuilder {
 
     }
 
+    public void setOnFormElementValueChangeListener(OnFormElementValueChangedListener onFormElementValueChangeListener) {
+        mFormAdapter.setOnFormElementValueChangeListener(onFormElementValueChangeListener);
+    }
+
+    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
+        mFormAdapter.setOnImageClickListener(onImageClickListener);
+    }
+
     /**
      * add list of form elements to be shown
      * @param formElementObjects
@@ -101,5 +110,9 @@ public class FormBuilder {
             }
         }
         return true;
+    }
+
+    public void updateImagePaths(String tag, List<String> imagePaths) {
+        mFormAdapter.updateImagePaths(tag, imagePaths);
     }
 }
