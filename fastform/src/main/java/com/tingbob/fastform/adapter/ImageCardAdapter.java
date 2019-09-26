@@ -32,10 +32,6 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
             imagesList.addAll(formElement.getListValue());
         }
         imagesList.add(imageAddBtnUri);
-        imagesList.add(imageAddBtnUri);
-        imagesList.add(imageAddBtnUri);
-        imagesList.add(imageAddBtnUri);
-        imagesList.add(imageAddBtnUri);
     }
 
     public String getItem(int position) {

@@ -6,15 +6,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.adapter.ImageCardAdapter;
 import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
-
-import java.util.List;
 
 /**
  * Created by tingbob  on 30-Jul-17.
