@@ -19,7 +19,7 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
 
     private Context mContext;
     private List<String> imagesList;
-    private final String imageAddBtnUri = "drawable://" + R.drawable.ic_image_add;
+    private final String imageAddBtnUri = "badd";
     public OnImageClickListener onImageClickListener;
     public FormElementPickerImageMultiple formElement;
 
@@ -78,10 +78,18 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
 
         public void updateView(final int position) {
             final String imagePath = getItem(position);
-            GlideApp.with(mContext)
-                    .load(imagePath)
-                    .dontAnimate()
-                    .into(iv_thumb);
+            if (imagePath.equals(imageAddBtnUri)) {
+                GlideApp.with(mContext)
+                        .load(R.drawable.ic_image_add)
+                        .dontAnimate()
+                        .into(iv_thumb);
+            } else {
+                GlideApp.with(mContext)
+                        .load(imagePath)
+                        .dontAnimate()
+                        .into(iv_thumb);
+            }
+
 
             final boolean bAddBtn = (position == getItemCount() - 1);
             iv_thumb.setOnClickListener(new View.OnClickListener() {
