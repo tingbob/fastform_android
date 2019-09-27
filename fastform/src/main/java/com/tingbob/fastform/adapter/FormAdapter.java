@@ -13,14 +13,16 @@ import java.util.List;
 import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
+import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
-import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementTextNumber;
 import com.tingbob.fastform.model.FormElementTextNumberStatistic;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
+import com.tingbob.fastform.viewholder.FormElementButtonViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
 import com.tingbob.fastform.viewholder.FormElementPickerDateViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerImageMultiViewHolder;
@@ -46,7 +48,8 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private Context mContext;
     private List<FormElementObject> mDataset;
     private OnFormElementValueChangedListener mListener;
-    public OnImageClickListener onImageClickListener;
+    private OnImageAddClickListener onImageAddClickListener;
+    private OnButtonClickListener onButtonClickListener;
 
     /**
      * public constructor with context
@@ -63,8 +66,12 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         this.mListener = onFormElementValueChangeListener;
     }
 
-    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
-        this.onImageClickListener = onImageClickListener;
+    public void setOnImageAddClickListener(OnImageAddClickListener onImageAddClickListener) {
+        this.onImageAddClickListener = onImageAddClickListener;
+    }
+
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
     }
 
     /**
@@ -296,7 +303,11 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             }
             case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
                 return new FormElementPickerImageMultiViewHolder(inflater.inflate(R.layout.form_element_imageview_multiple_picker, parent, false),
-                        onImageClickListener);
+                        onImageAddClickListener);
+            }
+            case IFormElementType.TYPE_BUTTON: {
+                return new FormElementButtonViewHolder(inflater.inflate(R.layout.form_element_button, parent, false),
+                        onButtonClickListener);
             }
             default:
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),

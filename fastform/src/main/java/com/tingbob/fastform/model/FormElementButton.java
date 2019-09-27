@@ -2,13 +2,11 @@ package com.tingbob.fastform.model;
 
 import com.tingbob.fastform.IFormElementType;
 
-import java.util.List;
-
 /**
  * Created by tingbob  on 28-Jul-17.
  */
 
-public class FormElementPickerImageMultiple implements FormElementObject<FormElementPickerImageMultiple> {
+public class FormElementButton implements FormElementObject<FormElementButton> {
 
     // private variables
     private String mTag; // unique tag to identify the object
@@ -17,15 +15,14 @@ public class FormElementPickerImageMultiple implements FormElementObject<FormEle
     private String mValue; // value to be shown on right
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
-    private List<String> mListValue;
 
-    public FormElementPickerImageMultiple() {
+    public FormElementButton() {
     }
 
-    public static FormElementPickerImageMultiple createInstance() {
-        FormElementPickerImageMultiple formElementPickerImageMultiple = new FormElementPickerImageMultiple();
-        formElementPickerImageMultiple.setType(IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE);
-        return formElementPickerImageMultiple;
+    public static FormElementButton createInstance() {
+        FormElementButton form = new FormElementButton();
+        form.setType(IFormElementType.TYPE_BUTTON);
+        return form;
     }
 
     @Override
@@ -58,43 +55,35 @@ public class FormElementPickerImageMultiple implements FormElementObject<FormEle
         return mRequired;
     }
 
-    public FormElementPickerImageMultiple setTag(String mTag) {
+    public FormElementButton setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
-    public FormElementPickerImageMultiple setType(int mType) {
+    public FormElementButton setType(int mType) {
         this.mType = mType;
         return this;
     }
 
-    public FormElementPickerImageMultiple setTitle(String mTitle) {
+    public FormElementButton setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
     }
 
     @Override
-    public FormElementPickerImageMultiple setValue(String mValue) {
+    public FormElementButton setValue(String mValue) {
         this.mValue = mValue;
         return this;
     }
 
-    public FormElementPickerImageMultiple setHint(String mHint) {
+    public FormElementButton setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
-    public FormElementPickerImageMultiple setRequired(boolean required) {
+    public FormElementButton setRequired(boolean required) {
         this.mRequired = required;
         return this;
     }
 
-    public List<String> getListValue() {
-        return mListValue;
-    }
-
-    public FormElementPickerImageMultiple setListValue(List<String> values) {
-        mListValue = values;
-        return this;
-    }
 }

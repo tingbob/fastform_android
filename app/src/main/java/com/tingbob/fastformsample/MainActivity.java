@@ -7,8 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.tingbob.fastform.FormBuilder;
+import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
-import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerDate;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageClickListener {
+        OnImageAddClickListener, OnButtonClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -91,6 +93,9 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormElementPickerImageMultiple element51 = FormElementPickerImageMultiple.createInstance().setTag("51").setTitle("Image Picker");
         mFormBuilder.setOnImageClickListener(this);
 
+        FormElementButton element61 = FormElementButton.createInstance().setTag("61").setValue("+ Add a group");
+        mFormBuilder.setOnButtonClickListener(this);
+
         List<FormElementObject> formItems = new ArrayList<>();
         formItems.add(header1);
         formItems.add(element11);
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         formItems.add(element42);
         formItems.add(element43);
         formItems.add(element51);
+        formItems.add(element61);
         mFormBuilder.addFormElements(formItems);
 
     }
@@ -120,7 +126,12 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     }
 
     @Override
-    public void onImageClick(String tag, String imagePath, boolean bAddBtn) {
-        Toast.makeText(this, "tag = " + tag + " bAddBtn = " + bAddBtn, Toast.LENGTH_SHORT).show();
+    public void onImageAddClick(String tag) {
+        Toast.makeText(this, "Add Image Click tag = " + tag, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onButtonClick(String tag) {
+        Toast.makeText(this, "Add Button Click tag = " + tag, Toast.LENGTH_SHORT).show();
     }
 }

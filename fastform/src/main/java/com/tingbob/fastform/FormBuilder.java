@@ -12,8 +12,9 @@ import android.text.TextUtils;
 import java.util.List;
 
 import com.tingbob.fastform.adapter.FormAdapter;
+import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
-import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 
 /** Wrapper class around the adapter to assist in building form
@@ -75,8 +76,12 @@ public class FormBuilder {
         mFormAdapter.setOnFormElementValueChangeListener(onFormElementValueChangeListener);
     }
 
-    public void setOnImageClickListener(OnImageClickListener onImageClickListener) {
-        mFormAdapter.setOnImageClickListener(onImageClickListener);
+    public void setOnImageClickListener(OnImageAddClickListener onImageAddClickListener) {
+        mFormAdapter.setOnImageAddClickListener(onImageAddClickListener);
+    }
+
+    public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
+        mFormAdapter.setOnButtonClickListener(onButtonClickListener);
     }
 
     /**

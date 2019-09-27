@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.tingbob.fastform.GlideApp;
 import com.tingbob.fastform.R;
-import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 
 import java.util.ArrayList;
@@ -20,13 +20,13 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
     private Context mContext;
     private List<String> imagesList;
     private final String imageAddBtnUri = "badd";
-    public OnImageClickListener onImageClickListener;
+    public OnImageAddClickListener onImageAddClickListener;
     public FormElementPickerImageMultiple formElement;
 
-    public ImageCardAdapter(Context mContext, FormElementPickerImageMultiple formElement, OnImageClickListener onImageClickListener) {
+    public ImageCardAdapter(Context mContext, FormElementPickerImageMultiple formElement, OnImageAddClickListener onImageAddClickListener) {
         this.mContext = mContext;
         this.formElement = formElement;
-        this.onImageClickListener = onImageClickListener;
+        this.onImageAddClickListener = onImageAddClickListener;
         imagesList = new ArrayList<>();
         if (formElement.getListValue() != null && !formElement.getListValue().isEmpty()) {
             imagesList.addAll(formElement.getListValue());
@@ -87,13 +87,17 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
             }
 
 
-            final boolean bAddBtn = (position == getItemCount() - 1);
-            iv_thumb.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onImageClickListener.onImageClick(formElement.getTag(), imagePath, bAddBtn);
-                }
-            });
+            boolean bAddBtn = (position == getItemCount() - 1);
+            if (bAddBtn) {
+                iv_thumb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) { onImageAddClickListener.onImageAddClick(formElement.getTag());
+                    }
+                });
+            } else {
+                iv_thumb.setOnClickListener(null);
+            }
+
 
             iv_del.setVisibility(bAddBtn ? View.GONE : View.VISIBLE);
             iv_del.setOnClickListener(new View.OnClickListener() {
