@@ -13,6 +13,7 @@ import java.util.List;
 import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
+import com.tingbob.fastform.listener.OnAttachUploadClickListener;
 import com.tingbob.fastform.listener.OnButtonAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
@@ -21,6 +22,7 @@ import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormElementPickerAttach;
 import com.tingbob.fastform.model.FormElementPickerDate;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementPickerMulti;
@@ -39,6 +41,7 @@ import com.tingbob.fastform.utils.Utils;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
 import com.tingbob.fastform.viewholder.FormElementButtonViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
+import com.tingbob.fastform.viewholder.FormElementPickerAttachViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerDateViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerImageMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerMultiViewHolder;
@@ -65,6 +68,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private OnFormElementValueChangedListener mListener;
     private OnImageAddClickListener onImageAddClickListener;
     private OnButtonClickListener onButtonClickListener;
+    private OnAttachUploadClickListener onAttachUploadClickListener;
 
     /**
      * public constructor with context
@@ -87,6 +91,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
 
     public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
         this.onButtonClickListener = onButtonClickListener;
+    }
+
+    public void setOnAttachUploadClickListener(OnAttachUploadClickListener onAttachUploadClickListener) {
+        this.onAttachUploadClickListener = onAttachUploadClickListener;
     }
 
     private OnHeaderDelClickListener onHeaderDelClickListener = new OnHeaderDelClickListener() {
@@ -470,6 +478,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 return new FormElementButtonViewHolder(inflater.inflate(R.layout.form_element_button, parent, false),
                         onButtonClickListener, onButtonAddClickListener);
             }
+            case IFormElementType.TYPE_PICKER_ATTACH: {
+                return new FormElementPickerAttachViewHolder(inflater.inflate(R.layout.form_element_attach, parent, false),
+                        onAttachUploadClickListener);
+            }
             default:
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
                         new FormItemEditTextListener(this));
@@ -532,6 +544,15 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         }
         FormElementPickerImageMultiple formElement = (FormElementPickerImageMultiple)getElementByTag(tag);
         formElement.setListValue(imagePaths);
+        notifyItemChanged(getPositionByTag(tag));
+    }
+
+    public void updateAttachList(String tag, List<String> attachList) {
+        if (attachList == null || attachList.isEmpty()) {
+            return;
+        }
+        FormElementPickerAttach formElement = (FormElementPickerAttach)getElementByTag(tag);
+        formElement.setListValue(attachList);
         notifyItemChanged(getPositionByTag(tag));
     }
 

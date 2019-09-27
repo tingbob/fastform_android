@@ -7,11 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.tingbob.fastform.FormBuilder;
+import com.tingbob.fastform.listener.OnAttachUploadClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormElementPickerAttach;
 import com.tingbob.fastform.model.FormElementPickerDate;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementPickerMulti;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageAddClickListener, OnButtonClickListener {
+        OnImageAddClickListener, OnButtonClickListener, OnAttachUploadClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -93,6 +95,13 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormElementPickerImageMultiple element51 = FormElementPickerImageMultiple.createInstance().setTag("51").setTitle("Image Picker");
         mFormBuilder.setOnImageClickListener(this);
 
+        List<String> names = new ArrayList<>();
+        names.add("12345.pdf");
+        names.add("2837938475928.doc");
+        names.add("dsliewngiejio.pic");
+        FormElementPickerAttach element52 = FormElementPickerAttach.createInstance().setTag("52").setTitle("Attach").setValue("Click to upload").setListValue(names);
+        mFormBuilder.setOnAttachUploadClickListener(this);
+
         FormElementButton element61 = FormElementButton.createInstance().setTag("61").setValue("+ Add a group");
         List<FormElementObject> objects = new ArrayList<>();
         objects.add(header4);
@@ -100,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         objects.add(element42);
         objects.add(element43);
         objects.add(element51);
+        objects.add(element52);
         element61.setActionAddElements(objects);
         mFormBuilder.setOnButtonClickListener(this);
 
@@ -122,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         formItems.add(element42);
         formItems.add(element43);
         formItems.add(element51);
+        formItems.add(element52);
         formItems.add(element61);
         mFormBuilder.addFormElements(formItems);
 
@@ -140,5 +151,10 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     @Override
     public void onButtonClick(String tag) {
         Toast.makeText(this, "Add Button Click tag = " + tag, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onAttachUploadClick(String tag) {
+        Toast.makeText(this, "Attach Upload Click tag = " + tag, Toast.LENGTH_SHORT).show();
     }
 }

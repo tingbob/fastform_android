@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import java.util.List;
 
 import com.tingbob.fastform.adapter.FormAdapter;
+import com.tingbob.fastform.listener.OnAttachUploadClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
@@ -84,6 +85,10 @@ public class FormBuilder {
         mFormAdapter.setOnButtonClickListener(onButtonClickListener);
     }
 
+    public void setOnAttachUploadClickListener(OnAttachUploadClickListener onAttachUploadClickListener) {
+        mFormAdapter.setOnAttachUploadClickListener(onAttachUploadClickListener);
+    }
+
     /**
      * add list of form elements to be shown
      * @param formElementObjects
@@ -127,5 +132,9 @@ public class FormBuilder {
 
     public void updateImagePaths(String tag, List<String> imagePaths) {
         mFormAdapter.updateImagePaths(tag, imagePaths);
+    }
+
+    public void updateAttachList(String tag, List<String> attachList) {
+        mFormAdapter.updateAttachList(tag, attachList);
     }
 }
