@@ -8,6 +8,7 @@ public class BaseFormElement implements FormElementObject<BaseFormElement> {
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -15,16 +16,19 @@ public class BaseFormElement implements FormElementObject<BaseFormElement> {
     private boolean mRequired; // value to set is the field is required
 
     // setters
+    @Override
     public BaseFormElement setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public BaseFormElement setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public BaseFormElement setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -36,11 +40,13 @@ public class BaseFormElement implements FormElementObject<BaseFormElement> {
         return this;
     }
 
+    @Override
     public BaseFormElement setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public BaseFormElement setRequired(boolean required) {
         this.mRequired = required;
         return this;
@@ -86,5 +92,16 @@ public class BaseFormElement implements FormElementObject<BaseFormElement> {
                 ", mHint='" + mHint + '\'' +
                 ", mRequired=" + mRequired +
                 '}';
+    }
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public BaseFormElement setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
+        return this;
     }
 }

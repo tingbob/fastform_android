@@ -3,9 +3,12 @@ package com.tingbob.fastform.viewholder;
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.tingbob.fastform.R;
+import com.tingbob.fastform.listener.OnHeaderDelClickListener;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormHeader;
 
 /**
  * ViewHolder for Header
@@ -15,15 +18,34 @@ import com.tingbob.fastform.model.FormElementObject;
 public class FormElementHeader extends BaseViewHolder {
 
     public AppCompatTextView mTextViewTitle;
+    public ImageView iv_del;
+    private OnHeaderDelClickListener onHeaderDelClickListener;
 
-    public FormElementHeader(View v) {
+    public FormElementHeader(View v, OnHeaderDelClickListener onHeaderDelClickListener) {
         super(v);
+        this.onHeaderDelClickListener = onHeaderDelClickListener;
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
+        iv_del = v.findViewById(R.id.iv_del);
     }
 
     @Override
     public void bind(int position, FormElementObject formElement, final Context context) {
-        mTextViewTitle.setText(formElement.getTitle());
+        final FormHeader formHeader = (FormHeader)formElement;
+        mTextViewTitle.setText(formHeader.getTitle());
+        iv_del.setVisibility((formHeader.getRelatedTags() == null || formHeader.getRelatedTags().isEmpty()) ? View.GONE : View.VISIBLE);
+        if (iv_del.getVisibility() == View.VISIBLE) {
+            iv_del.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onHeaderDelClickListener != null) {
+                        onHeaderDelClickListener.onHeaderDelClick(formHeader.getTag());
+                    }
+                }
+            });
+        } else {
+            iv_del.setOnClickListener(null);
+        }
+
     }
 
 }

@@ -13,6 +13,7 @@ public class FormElementPickerSingle implements FormElementObject<FormElementPic
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -22,9 +23,6 @@ public class FormElementPickerSingle implements FormElementObject<FormElementPic
     private String pickerTitle; // custom title for picker
     private List<String> mOptions; // list of options for single and multi picker
     private List<String> mOptionsSelected; // list of selected options for single and multi picker
-
-    public FormElementPickerSingle() {
-    }
 
     public static FormElementPickerSingle createInstance() {
         FormElementPickerSingle formElementPickerSingle = new FormElementPickerSingle();
@@ -63,16 +61,19 @@ public class FormElementPickerSingle implements FormElementObject<FormElementPic
         return mRequired;
     }
 
+    @Override
     public FormElementPickerSingle setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementPickerSingle setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementPickerSingle setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -84,13 +85,26 @@ public class FormElementPickerSingle implements FormElementObject<FormElementPic
         return this;
     }
 
+    @Override
     public FormElementPickerSingle setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementPickerSingle setRequired(boolean required) {
         this.mRequired = required;
+        return this;
+    }
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementPickerSingle setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
         return this;
     }
 

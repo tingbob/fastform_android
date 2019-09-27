@@ -12,6 +12,7 @@ import java.util.Locale;
 public class FormElementPickerDate implements FormElementObject<FormElementPickerDate> {
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -19,9 +20,6 @@ public class FormElementPickerDate implements FormElementObject<FormElementPicke
     private boolean mRequired; // value to set is the field is required
 
     private String dateFormat; // custom format for date
-
-    public FormElementPickerDate() {
-    }
 
     public static FormElementPickerDate createInstance() {
         FormElementPickerDate formElementPickerDate = new FormElementPickerDate();
@@ -60,16 +58,19 @@ public class FormElementPickerDate implements FormElementObject<FormElementPicke
         return mRequired;
     }
 
+    @Override
     public FormElementPickerDate setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementPickerDate setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementPickerDate setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -81,13 +82,26 @@ public class FormElementPickerDate implements FormElementObject<FormElementPicke
         return this;
     }
 
+    @Override
     public FormElementPickerDate setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementPickerDate setRequired(boolean required) {
         this.mRequired = required;
+        return this;
+    }
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementPickerDate setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
         return this;
     }
 

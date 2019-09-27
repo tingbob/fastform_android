@@ -10,14 +10,12 @@ public class FormElementTextPassword implements FormElementObject<FormElementTex
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
-
-    public FormElementTextPassword() {
-    }
 
     public static FormElementTextPassword createInstance() {
         FormElementTextPassword FormElementTextPassword = new FormElementTextPassword();
@@ -55,16 +53,19 @@ public class FormElementTextPassword implements FormElementObject<FormElementTex
         return mRequired;
     }
 
+    @Override
     public FormElementTextPassword setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementTextPassword setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementTextPassword setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -76,14 +77,26 @@ public class FormElementTextPassword implements FormElementObject<FormElementTex
         return this;
     }
 
+    @Override
     public FormElementTextPassword setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementTextPassword setRequired(boolean required) {
         this.mRequired = required;
         return this;
     }
-    
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementTextPassword setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
+        return this;
+    }
 }

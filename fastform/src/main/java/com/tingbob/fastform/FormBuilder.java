@@ -93,6 +93,14 @@ public class FormBuilder {
     }
 
     /**
+     * add list of form elements of the position to be shown
+     * @param formElementObjects
+     */
+    public void addFormElements(int index, List<FormElementObject> formElementObjects) {
+        this.mFormAdapter.addElements(index, formElementObjects);
+    }
+
+    /**
      * get value of specific form element
      * @param tag
      * @return

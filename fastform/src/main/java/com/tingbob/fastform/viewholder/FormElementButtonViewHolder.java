@@ -5,6 +5,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
+import com.tingbob.fastform.listener.OnButtonAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 
@@ -15,12 +16,14 @@ import com.tingbob.fastform.model.FormElementObject;
 public class FormElementButtonViewHolder extends BaseViewHolder {
 
     private OnButtonClickListener onButtonClickListener;
+    private OnButtonAddClickListener onButtonAddClickListener;
 
     public AppCompatTextView mTextViewButtonValue;
 
-    public FormElementButtonViewHolder(View v, OnButtonClickListener onButtonClickListener) {
+    public FormElementButtonViewHolder(View v, OnButtonClickListener onButtonClickListener, OnButtonAddClickListener onButtonAddClickListener) {
         super(v);
         this.onButtonClickListener = onButtonClickListener;
+        this.onButtonAddClickListener = onButtonAddClickListener;
         mTextViewButtonValue = v.findViewById(R.id.formElementValue);
     }
 
@@ -32,6 +35,10 @@ public class FormElementButtonViewHolder extends BaseViewHolder {
             public void onClick(View v) {
                 if (onButtonClickListener != null) {
                     onButtonClickListener.onButtonClick(formElement.getTag());
+                }
+
+                if (onButtonAddClickListener != null) {
+                    onButtonAddClickListener.onButtonAddClick(formElement.getTag());
                 }
             }
         });

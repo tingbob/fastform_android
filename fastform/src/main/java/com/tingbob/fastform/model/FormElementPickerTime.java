@@ -13,6 +13,7 @@ public class FormElementPickerTime implements FormElementObject<FormElementPicke
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -20,9 +21,6 @@ public class FormElementPickerTime implements FormElementObject<FormElementPicke
     private boolean mRequired; // value to set is the field is required
 
     private String timeFormat; // custom format for date
-
-    public FormElementPickerTime() {
-    }
 
     public static FormElementPickerTime createInstance() {
         FormElementPickerTime formElementPickerTime = new FormElementPickerTime();
@@ -61,16 +59,19 @@ public class FormElementPickerTime implements FormElementObject<FormElementPicke
         return mRequired;
     }
 
+    @Override
     public FormElementPickerTime setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementPickerTime setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementPickerTime setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -82,13 +83,26 @@ public class FormElementPickerTime implements FormElementObject<FormElementPicke
         return this;
     }
 
+    @Override
     public FormElementPickerTime setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementPickerTime setRequired(boolean required) {
         this.mRequired = required;
+        return this;
+    }
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementPickerTime setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
         return this;
     }
 

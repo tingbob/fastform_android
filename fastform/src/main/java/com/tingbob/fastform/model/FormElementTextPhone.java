@@ -10,14 +10,12 @@ public class FormElementTextPhone implements FormElementObject<FormElementTextPh
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
-
-    public FormElementTextPhone() {
-    }
 
     public static FormElementTextPhone createInstance() {
         FormElementTextPhone FormElementTextPhone = new FormElementTextPhone();
@@ -55,16 +53,19 @@ public class FormElementTextPhone implements FormElementObject<FormElementTextPh
         return mRequired;
     }
 
+    @Override
     public FormElementTextPhone setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementTextPhone setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementTextPhone setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -76,14 +77,26 @@ public class FormElementTextPhone implements FormElementObject<FormElementTextPh
         return this;
     }
 
+    @Override
     public FormElementTextPhone setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementTextPhone setRequired(boolean required) {
         this.mRequired = required;
         return this;
     }
-    
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementTextPhone setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
+        return this;
+    }
 }

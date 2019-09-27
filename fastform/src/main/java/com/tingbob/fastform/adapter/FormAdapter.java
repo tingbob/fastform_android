@@ -13,14 +13,29 @@ import java.util.List;
 import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
+import com.tingbob.fastform.listener.OnButtonAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
+import com.tingbob.fastform.listener.OnHeaderDelClickListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
+import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
+import com.tingbob.fastform.model.FormElementPickerDate;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
+import com.tingbob.fastform.model.FormElementPickerMulti;
+import com.tingbob.fastform.model.FormElementPickerSingle;
+import com.tingbob.fastform.model.FormElementPickerTime;
+import com.tingbob.fastform.model.FormElementSwitch;
+import com.tingbob.fastform.model.FormElementTextEmail;
+import com.tingbob.fastform.model.FormElementTextMultiLine;
 import com.tingbob.fastform.model.FormElementTextNumber;
 import com.tingbob.fastform.model.FormElementTextNumberStatistic;
+import com.tingbob.fastform.model.FormElementTextPassword;
+import com.tingbob.fastform.model.FormElementTextPhone;
+import com.tingbob.fastform.model.FormElementTextSingleLine;
+import com.tingbob.fastform.model.FormHeader;
+import com.tingbob.fastform.utils.Utils;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
 import com.tingbob.fastform.viewholder.FormElementButtonViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
@@ -74,12 +89,145 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         this.onButtonClickListener = onButtonClickListener;
     }
 
+    private OnHeaderDelClickListener onHeaderDelClickListener = new OnHeaderDelClickListener() {
+        @Override
+        public void onHeaderDelClick(String tag) {
+            FormHeader formHeader = (FormHeader)getElementByTag(tag);
+            List<String> tags = formHeader.getRelatedTags();
+            if (tags == null || tags.isEmpty()) {
+                return;
+            }
+            for (String relatedTag : tags) {
+                mDataset.remove(getElementByTag(relatedTag));
+            }
+            updateRelatedStatisticTags();
+            notifyDataSetChanged();
+        }
+    };
+
+    private OnButtonAddClickListener onButtonAddClickListener = new OnButtonAddClickListener() {
+        @Override
+        public void onButtonAddClick(String tag) {
+            FormElementButton formElementButton = (FormElementButton)getElementByTag(tag);
+            int index = getPositionByTag(tag);
+            if (formElementButton.getActionAddElements() == null || formElementButton.getActionAddElements().isEmpty()) {
+                return;
+            }
+            FormHeader formHeader = null;
+            List<String> relatedTags = new ArrayList<>();
+            FormElementTextNumber formElementTextNumber = null;
+            for (int i = 0; i < formElementButton.getActionAddElements().size(); i++) {
+                FormElementObject formElementObject = formElementButton.getActionAddElements().get(i);
+                FormElementObject formElement;
+                switch (formElementObject.getType()) {
+                    case IFormElementType.TYPE_HEADER: {
+                        formHeader = FormHeader.createInstance();
+                        formElement = formHeader;
+                        break;
+                    }
+                    case IFormElementType.TYPE_EDITTEXT_TEXT_SINGLELINE: {
+                        formElement = FormElementTextSingleLine.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_EDITTEXT_TEXT_MULTILINE: {
+                        formElement = FormElementTextMultiLine.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_EDITTEXT_NUMBER: {
+                        formElementTextNumber = FormElementTextNumber.createInstance()
+                                .setRelatedStatisticTag(((FormElementTextNumber)formElementObject).getRelatedStatisticTag());
+                        formElement = formElementTextNumber;
+                        break;
+                    }
+                    case IFormElementType.TYPE_EDITTEXT_EMAIL: {
+                        formElement = FormElementTextEmail.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_EDITTEXT_PHONE: {
+                        formElement = FormElementTextPhone.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_EDITTEXT_PASSWORD: {
+                        formElement = FormElementTextPassword.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_PICKER_DATE: {
+                        formElement = FormElementPickerDate.createInstance()
+                                .setDateFormat(((FormElementPickerDate)formElementObject).getDateFormat());
+                        break;
+                    }
+                    case IFormElementType.TYPE_PICKER_TIME: {
+                        formElement = FormElementPickerTime.createInstance()
+                                .setTimeFormat(((FormElementPickerTime)formElementObject).getTimeFormat());
+                        break;
+                    }
+                    case IFormElementType.TYPE_PICKER_SINGLE: {
+                        formElement = FormElementPickerSingle.createInstance()
+                                .setOptions(((FormElementPickerSingle)formElementObject).getOptions());
+                        break;
+                    }
+                    case IFormElementType.TYPE_PICKER_MULTI: {
+                        formElement = FormElementPickerMulti.createInstance()
+                                .setNegativeText(((FormElementPickerMulti)formElementObject).getNegativeText())
+                                .setPositiveText(((FormElementPickerMulti)formElementObject).getPositiveText())
+                                .setPickerTitle(((FormElementPickerMulti)formElementObject).getPickerTitle())
+                                .setOptions(((FormElementPickerMulti)formElementObject).getOptions());
+                        break;
+                    }
+                    case IFormElementType.TYPE_SWITCH: {
+                        formElement = FormElementSwitch.createInstance()
+                                .setSwitchTexts(((FormElementSwitch)formElementObject).getPositiveText(), ((FormElementSwitch)formElementObject).getNegativeText());
+                        break;
+                    }
+                    case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
+                        formElement = FormElementPickerImageMultiple.createInstance();
+                        break;
+                    }
+                    default:
+                        formElement = FormElementTextSingleLine.createInstance();
+                        break;
+                }
+                formElement.setTag(Utils.generateKey());
+                relatedTags.add(formElement.getTag());
+                formElement.setGroupTag(formElementButton.getGroupTag());
+                formElement.setType(formElementObject.getType());
+                formElement.setTitle(formElementObject.getTitle());
+                formElement.setValue(formElementObject.getValue());
+                formElement.setHint(formElementObject.getHint());
+                formElement.setRequired(formElementObject.isRequired());
+                addElement(index + i, formElement);
+            }
+            if (formHeader != null && !relatedTags.isEmpty()) {
+                formHeader.setRelatedTags(relatedTags);
+            }
+
+            if (formElementTextNumber != null && !TextUtils.isEmpty(formElementTextNumber.getRelatedStatisticTag())) {
+                FormElementTextNumberStatistic formElementTextNumberStatistic = (FormElementTextNumberStatistic)getElementByTag(formElementTextNumber.getRelatedStatisticTag());
+                formElementTextNumberStatistic.getStatisticTags().add(formElementTextNumber.getTag());
+            }
+            notifyDataSetChanged();
+        }
+    };
+
     /**
      * adds list of elements to be shown
      * @param formObjects
      */
     public void addElements(List<FormElementObject> formObjects) {
-        this.mDataset = formObjects;
+        this.mDataset.addAll(formObjects);
+        updateRelatedStatisticTags();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * adds list of elements of the position to be shown
+     *
+     * @param index
+     * @param formObjects
+     */
+
+    public void addElements(int index, List<FormElementObject> formObjects) {
+        this.mDataset.addAll(index, formObjects);
         updateRelatedStatisticTags();
         notifyDataSetChanged();
     }
@@ -90,6 +238,19 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
      */
     public void addElement(FormElementObject formObject) {
         this.mDataset.add(formObject);
+        updateRelatedStatisticTags();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * adds single element of the position to be shown
+     *
+     * @param index
+     * @param formObject
+     */
+    public void addElement(int index, FormElementObject formObject) {
+        this.mDataset.add(index, formObject);
+        updateRelatedStatisticTags();
         notifyDataSetChanged();
     }
 
@@ -251,7 +412,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         View v;
         switch (viewType) {
             case IFormElementType.TYPE_HEADER: {
-                return new FormElementHeader(inflater.inflate(R.layout.form_element_header, parent, false));
+                return new FormElementHeader(inflater.inflate(R.layout.form_element_header, parent, false), onHeaderDelClickListener);
             }
             case IFormElementType.TYPE_EDITTEXT_TEXT_SINGLELINE: {
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
@@ -307,7 +468,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             }
             case IFormElementType.TYPE_BUTTON: {
                 return new FormElementButtonViewHolder(inflater.inflate(R.layout.form_element_button, parent, false),
-                        onButtonClickListener);
+                        onButtonClickListener, onButtonAddClickListener);
             }
             default:
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),

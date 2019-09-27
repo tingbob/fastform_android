@@ -10,14 +10,12 @@ public class FormElementTextMultiLine implements FormElementObject<FormElementTe
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
-
-    public FormElementTextMultiLine() {
-    }
 
     public static FormElementTextMultiLine createInstance() {
         FormElementTextMultiLine FormElementTextMultiLine = new FormElementTextMultiLine();
@@ -55,16 +53,19 @@ public class FormElementTextMultiLine implements FormElementObject<FormElementTe
         return mRequired;
     }
 
+    @Override
     public FormElementTextMultiLine setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementTextMultiLine setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementTextMultiLine setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -76,14 +77,26 @@ public class FormElementTextMultiLine implements FormElementObject<FormElementTe
         return this;
     }
 
+    @Override
     public FormElementTextMultiLine setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementTextMultiLine setRequired(boolean required) {
         this.mRequired = required;
         return this;
     }
 
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementTextMultiLine setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
+        return this;
+    }
 }

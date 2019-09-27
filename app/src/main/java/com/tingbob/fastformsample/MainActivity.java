@@ -94,6 +94,13 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         mFormBuilder.setOnImageClickListener(this);
 
         FormElementButton element61 = FormElementButton.createInstance().setTag("61").setValue("+ Add a group");
+        List<FormElementObject> objects = new ArrayList<>();
+        objects.add(header4);
+        objects.add(element41);
+        objects.add(element42);
+        objects.add(element43);
+        objects.add(element51);
+        element61.setActionAddElements(objects);
         mFormBuilder.setOnButtonClickListener(this);
 
         List<FormElementObject> formItems = new ArrayList<>();

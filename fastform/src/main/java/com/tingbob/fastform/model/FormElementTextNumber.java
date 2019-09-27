@@ -10,15 +10,13 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
     private String mRelatedStatisticTag;
-
-    public FormElementTextNumber() {
-    }
 
     public static FormElementTextNumber createInstance() {
         FormElementTextNumber FormElementTextNumber = new FormElementTextNumber();
@@ -56,16 +54,19 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
         return mRequired;
     }
 
+    @Override
     public FormElementTextNumber setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementTextNumber setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementTextNumber setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -77,13 +78,26 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
         return this;
     }
 
+    @Override
     public FormElementTextNumber setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementTextNumber setRequired(boolean required) {
         this.mRequired = required;
+        return this;
+    }
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementTextNumber setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
         return this;
     }
 

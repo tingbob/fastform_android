@@ -13,6 +13,7 @@ public class FormElementPickerMulti implements FormElementObject<FormElementPick
 
     // private variables
     private String mTag; // unique tag to identify the object
+    private String mGroupTag; // unique tag ot identify related group
     private int mType; // type for the form element
     private String mTitle; // title to be shown on left
     private String mValue; // value to be shown on right
@@ -24,9 +25,6 @@ public class FormElementPickerMulti implements FormElementObject<FormElementPick
     private List<String> optionsSelected; // list of selected options for single and multi picker
     private String positiveText = "Ok"; // text for positive operation, like "ok"
     private String negativeText = "Cancel"; // text for negative operation, like "cancel"
-
-    public FormElementPickerMulti() {
-    }
 
     public static FormElementPickerMulti createInstance() {
         FormElementPickerMulti FormElementPickerMulti = new FormElementPickerMulti();
@@ -64,16 +62,19 @@ public class FormElementPickerMulti implements FormElementObject<FormElementPick
         return mRequired;
     }
 
+    @Override
     public FormElementPickerMulti setTag(String mTag) {
         this.mTag = mTag;
         return this;
     }
 
+    @Override
     public FormElementPickerMulti setType(int mType) {
         this.mType = mType;
         return this;
     }
 
+    @Override
     public FormElementPickerMulti setTitle(String mTitle) {
         this.mTitle = mTitle;
         return this;
@@ -85,13 +86,26 @@ public class FormElementPickerMulti implements FormElementObject<FormElementPick
         return this;
     }
 
+    @Override
     public FormElementPickerMulti setHint(String mHint) {
         this.mHint = mHint;
         return this;
     }
 
+    @Override
     public FormElementPickerMulti setRequired(boolean required) {
         mRequired = required;
+        return this;
+    }
+
+    @Override
+    public String getGroupTag() {
+        return mGroupTag;
+    }
+
+    @Override
+    public FormElementPickerMulti setGroupTag(String groupTag) {
+        this.mGroupTag = groupTag;
         return this;
     }
 
