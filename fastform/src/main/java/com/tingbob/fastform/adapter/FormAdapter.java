@@ -361,7 +361,11 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 if (statistic.getStatisticTags() != null) {
                     for (String tag : statistic.getStatisticTags()) {
                         FormElementTextNumber textNumber = (FormElementTextNumber)getElementByTag(tag);
-                        textNumber.setRelatedStatisticTag(statistic.getTag());
+                        if (textNumber != null) {
+                            textNumber.setRelatedStatisticTag(statistic.getTag());
+                        } else {
+                            statistic.getStatisticTags().remove(tag);
+                        }
                     }
                 }
             }
