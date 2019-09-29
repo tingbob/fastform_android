@@ -20,7 +20,7 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
-    private AppCompatEditText mEditTextValue;
+    private AppCompatTextView mTextViewValue;
     private ReloadListener mReloadListener;
     private FormElementObject mFormElement;
     private FormElementPickerSingle mFormElementPickerSingle;
@@ -30,7 +30,7 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
         super(v);
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTextViewValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
     }
 
@@ -42,9 +42,8 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
 
         mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mEditTextValue.setFocusableInTouchMode(false);
+        mTextViewValue.setText(formElement.getValue());
+        mTextViewValue.setHint(formElement.getHint());
 
         // reformat the options in format needed
         final CharSequence[] options = new CharSequence[mFormElementPickerSingle.getOptions().size()];
@@ -56,14 +55,14 @@ public class FormElementPickerSingleViewHolder extends BaseViewHolder {
             .setTitle(mFormElementPickerSingle.getPickerTitle())
             .setItems(options, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    mEditTextValue.setText(options[which]);
+                    mTextViewValue.setText(options[which]);
                     mFormElementPickerSingle.setValue(options[which].toString());
                     mReloadListener.updateValue(position, options[which].toString());
                 }
             })
             .create();
 
-        mEditTextValue.setOnClickListener(new View.OnClickListener() {
+        mTextViewValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.show();

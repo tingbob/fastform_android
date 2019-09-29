@@ -84,6 +84,7 @@ public class FormElementPickerDateViewHolder extends BaseViewHolder {
 
             // trigger event only if the value is changed
             if (!currentValue.equals(newValue)) {
+                mFormElement.setValue(newValue);
                 mReloadListener.updateValue(mPosition, newValue);
             }
         }

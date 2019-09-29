@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
@@ -22,31 +23,28 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
 
     private AppCompatTextView mTextViewRequired;
     private AppCompatTextView mTextViewTitle;
-    private AppCompatEditText mEditTextValue;
+    private AppCompatTextView mTextViewValue;
     private ReloadListener mReloadListener;
     private FormElementObject mFormElement;
     private FormElementPickerMulti mFormElementPickerMulti;
-    private int mPosition;
 
     public FormElementPickerMultiViewHolder(View v, Context context, ReloadListener reloadListener) {
         super(v);
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
-        mEditTextValue = v.findViewById(R.id.formElementValue);
+        mTextViewValue = v.findViewById(R.id.formElementValue);
         mReloadListener = reloadListener;
     }
 
     @Override
     public void bind(final int position, FormElementObject formElement, final Context context) {
         mFormElement = formElement;
-        mPosition = position;
         mFormElementPickerMulti = (FormElementPickerMulti) mFormElement;
 
         mTextViewRequired.setVisibility(formElement.isRequired() ? View.VISIBLE : View.GONE);
         mTextViewTitle.setText(formElement.getTitle());
-        mEditTextValue.setText(formElement.getValue());
-        mEditTextValue.setHint(formElement.getHint());
-        mEditTextValue.setFocusableInTouchMode(false);
+        mTextViewValue.setText(formElement.getValue());
+        mTextViewValue.setHint(formElement.getHint());
 
         // reformat the options in format needed
         final CharSequence[] options = new CharSequence[mFormElementPickerMulti.getOptions().size()];
@@ -84,21 +82,23 @@ public class FormElementPickerMultiViewHolder extends BaseViewHolder {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         String s = "";
+                        List<String> selectedOptions = new ArrayList<>();
                         for (int i = 0; i < mSelectedItems.size(); i++) {
                             s += options[mSelectedItems.get(i)];
-
+                            selectedOptions.add(String.valueOf(options[mSelectedItems.get(i)]));
                             if (i < mSelectedItems.size() - 1) {
                                 s += ", ";
                             }
                         }
-                        mEditTextValue.setText(s);
+                        mTextViewValue.setText(s);
+                        mFormElementPickerMulti.setOptionsSelected(selectedOptions);
                         mReloadListener.updateValue(position, s);
                     }
                 })
                 .setNegativeButton(mFormElementPickerMulti.getNegativeText(), null)
                 .create();
 
-        mEditTextValue.setOnClickListener(new View.OnClickListener() {
+        mTextViewValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.show();

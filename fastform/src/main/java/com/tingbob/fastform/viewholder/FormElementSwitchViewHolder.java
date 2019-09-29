@@ -48,6 +48,7 @@ public class FormElementSwitchViewHolder extends BaseViewHolder {
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mFormElement.setValue(b ? mFormElementSwitch.getPositiveText() : mFormElementSwitch.getNegativeText());
                 mReloadListener.updateValue(position, b ? mFormElementSwitch.getPositiveText() : mFormElementSwitch.getNegativeText());
             }
         });

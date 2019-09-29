@@ -18,21 +18,12 @@ public class FormElementTextNumberStatisticViewHolder extends BaseViewHolder {
     private AppCompatTextView mTextViewRequired;
     public AppCompatTextView mTextViewTitle;
     public AppCompatTextView mTextViewValue;
-    public FormItemEditTextListener mFormCustomEditTextListener;
 
-    public FormElementTextNumberStatisticViewHolder(View v, FormItemEditTextListener listener) {
+    public FormElementTextNumberStatisticViewHolder(View v) {
         super(v);
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mTextViewValue = v.findViewById(R.id.formElementValue);
-        mFormCustomEditTextListener = listener;
-        mTextViewValue.addTextChangedListener(mFormCustomEditTextListener);
-        mTextViewValue.setRawInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-    }
-
-    @Override
-    public FormItemEditTextListener getListener() {
-        return mFormCustomEditTextListener;
     }
 
     @Override

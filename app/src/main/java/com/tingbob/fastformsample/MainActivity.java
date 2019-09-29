@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.tingbob.fastform.FormBuilder;
-import com.tingbob.fastform.listener.OnAttachUploadClickListener;
+import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageAddClickListener, OnButtonClickListener, OnAttachUploadClickListener {
+        OnImageAddClickListener, OnButtonClickListener, OnAttachAddClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     private void setupForm() {
 
         mRecyclerView = findViewById(R.id.recyclerView);
-        mFormBuilder = new FormBuilder(this, mRecyclerView, this);
+        mFormBuilder = new FormBuilder(this, mRecyclerView);
+        mFormBuilder.setOnFormElementValueChangeListener(this);
 
         FormHeader header1 = FormHeader.createInstance().setTitle("Personal Info").setTag("1");
         FormElementTextEmail element11 = FormElementTextEmail.createInstance().setTag("11").setTitle("Email").setHint("Enter Email").setRequired(true);
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     }
 
     @Override
-    public void onAttachUploadClick(String tag) {
+    public void onAttachAddClick(String tag) {
         Toast.makeText(this, "Attach Upload Click tag = " + tag, Toast.LENGTH_SHORT).show();
     }
 }

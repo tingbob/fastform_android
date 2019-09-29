@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import java.util.List;
 
 import com.tingbob.fastform.adapter.FormAdapter;
-import com.tingbob.fastform.listener.OnAttachUploadClickListener;
+import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
@@ -32,28 +32,18 @@ public class FormBuilder {
      * @param recyclerView
      */
     public FormBuilder(Context context, RecyclerView recyclerView) {
-        initializeFormBuildHelper(context, recyclerView, null);
-    }
-
-    /**
-     * constructor with listener callback for changed values
-     * @param context
-     * @param recyclerView
-     */
-    public FormBuilder(Context context, RecyclerView recyclerView, OnFormElementValueChangedListener listener) {
-        initializeFormBuildHelper(context, recyclerView, listener);
+        initializeFormBuildHelper(context, recyclerView);
     }
 
     /**
      * private method for initializing form build helper
      * @param context
      * @param recyclerView
-     * @param listener
      */
-    private void initializeFormBuildHelper(Context context, RecyclerView recyclerView, OnFormElementValueChangedListener listener) {
+    private void initializeFormBuildHelper(Context context, RecyclerView recyclerView) {
 
         // initialize form adapter
-        this.mFormAdapter = new FormAdapter(context, listener);
+        this.mFormAdapter = new FormAdapter(context);
 
         // set up the recyclerview with adapter
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -85,8 +75,8 @@ public class FormBuilder {
         mFormAdapter.setOnButtonClickListener(onButtonClickListener);
     }
 
-    public void setOnAttachUploadClickListener(OnAttachUploadClickListener onAttachUploadClickListener) {
-        mFormAdapter.setOnAttachUploadClickListener(onAttachUploadClickListener);
+    public void setOnAttachUploadClickListener(OnAttachAddClickListener onAttachAddClickListener) {
+        mFormAdapter.setOnAttachAddClickListener(onAttachAddClickListener);
     }
 
     /**

@@ -13,7 +13,7 @@ import java.util.List;
 import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.FormItemEditTextListener;
-import com.tingbob.fastform.listener.OnAttachUploadClickListener;
+import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
@@ -68,16 +68,14 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private OnFormElementValueChangedListener mListener;
     private OnImageAddClickListener onImageAddClickListener;
     private OnButtonClickListener onButtonClickListener;
-    private OnAttachUploadClickListener onAttachUploadClickListener;
+    private OnAttachAddClickListener onAttachAddClickListener;
 
     /**
      * public constructor with context
      * @param context
      */
-    public FormAdapter(Context context,
-                       OnFormElementValueChangedListener listener) {
+    public FormAdapter(Context context) {
         this.mContext = context;
-        this.mListener = listener;
         this.mDataset = new ArrayList<>();
     }
 
@@ -93,8 +91,8 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         this.onButtonClickListener = onButtonClickListener;
     }
 
-    public void setOnAttachUploadClickListener(OnAttachUploadClickListener onAttachUploadClickListener) {
-        this.onAttachUploadClickListener = onAttachUploadClickListener;
+    public void setOnAttachAddClickListener(OnAttachAddClickListener onAttachAddClickListener) {
+        this.onAttachAddClickListener = onAttachAddClickListener;
     }
 
     private OnHeaderDelClickListener onHeaderDelClickListener = new OnHeaderDelClickListener() {
@@ -455,11 +453,11 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                         mContext, this);
             }
             case IFormElementType.TYPE_PICKER_SINGLE: {
-                return new FormElementPickerSingleViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                return new FormElementPickerSingleViewHolder(inflater.inflate(R.layout.form_element_picker_options, parent, false),
                         mContext, this);
             }
             case IFormElementType.TYPE_PICKER_MULTI: {
-                return new FormElementPickerMultiViewHolder(inflater.inflate(R.layout.form_element, parent, false),
+                return new FormElementPickerMultiViewHolder(inflater.inflate(R.layout.form_element_picker_options, parent, false),
                         mContext, this);
             }
             case IFormElementType.TYPE_SWITCH: {
@@ -467,8 +465,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                         mContext, this);
             }
             case IFormElementType.TYPE_NUMBER_STATISTIC: {
-                return new FormElementTextNumberStatisticViewHolder(inflater.inflate(R.layout.form_element_number_statistic, parent, false),
-                        new FormItemEditTextListener(this));
+                return new FormElementTextNumberStatisticViewHolder(inflater.inflate(R.layout.form_element_number_statistic, parent, false));
             }
             case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
                 return new FormElementPickerImageMultiViewHolder(inflater.inflate(R.layout.form_element_imageview_multiple_picker, parent, false),
@@ -480,7 +477,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             }
             case IFormElementType.TYPE_PICKER_ATTACH: {
                 return new FormElementPickerAttachViewHolder(inflater.inflate(R.layout.form_element_attach, parent, false),
-                        onAttachUploadClickListener);
+                        onAttachAddClickListener);
             }
             default:
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
