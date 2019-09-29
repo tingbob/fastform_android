@@ -189,6 +189,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                         formElement = FormElementPickerImageMultiple.createInstance();
                         break;
                     }
+                    case IFormElementType.TYPE_PICKER_ATTACH: {
+                        formElement = FormElementPickerAttach.createInstance();
+                        break;
+                    }
                     default:
                         formElement = FormElementTextSingleLine.createInstance();
                         break;
