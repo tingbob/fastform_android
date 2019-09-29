@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.tingbob.fastform.GlideApp;
+import com.bumptech.glide.Glide;
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
@@ -75,12 +75,12 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
         public void updateView(final int position) {
             final String imagePath = getItem(position);
             if (imagePath.equals(imageAddBtnUri)) {
-                GlideApp.with(mContext)
+                Glide.with(mContext)
                         .load(R.drawable.ic_image_add)
                         .dontAnimate()
                         .into(iv_thumb);
             } else {
-                GlideApp.with(mContext)
+                Glide.with(mContext)
                         .load(imagePath)
                         .dontAnimate()
                         .into(iv_thumb);

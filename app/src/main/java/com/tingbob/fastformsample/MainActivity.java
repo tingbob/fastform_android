@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeButtonEnabled(true);
         }
-
     }
 
     private void setupForm() {
