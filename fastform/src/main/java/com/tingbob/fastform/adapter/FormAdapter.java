@@ -524,7 +524,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         if (formStatistic.getStatisticTags() != null) {
             for (String tag : formStatistic.getStatisticTags()) {
                 String value = getValueAtTag(tag);
-                statistic += TextUtils.isEmpty(value) ? 0 : Integer.valueOf(value);
+                statistic += TextUtils.isEmpty(value) ? 0 : Float.valueOf(value);
             }
         }
         formStatistic.setValue(String.valueOf(statistic));
