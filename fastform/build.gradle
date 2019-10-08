@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.6"
+        versionName "1.0.7"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -46,7 +46,7 @@ ext {
     siteUrl = 'https://github.com/tingbob/fastform_android'
     gitUrl = 'https://github.com/tingbob/fastform_android.git'
 
-    libraryVersion = '1.0.6'
+    libraryVersion = '1.0.7'
 
     developerId = 'tingbob'
     developerName = 'Peter Fox'
