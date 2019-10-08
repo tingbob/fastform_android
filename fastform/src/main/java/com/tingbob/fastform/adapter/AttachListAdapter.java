@@ -32,9 +32,9 @@ public class AttachListAdapter extends RecyclerView.Adapter<AttachListAdapter.At
     }
 
     public void removeItem(int position) {
+        formElement.getListValue().remove(attachList.get(position));
         attachList.remove(position);
         notifyDataSetChanged();
-        formElement.setListValue(attachList);
     }
 
     @Override

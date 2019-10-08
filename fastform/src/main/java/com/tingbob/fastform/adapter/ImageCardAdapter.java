@@ -39,9 +39,9 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
     }
 
     public void removeItem(int position) {
+        formElement.getListValue().remove(imagesList.get(position));
         imagesList.remove(position);
         notifyDataSetChanged();
-        formElement.setListValue(imagesList.subList(0, getItemCount() - 1));
     }
 
     @Override
