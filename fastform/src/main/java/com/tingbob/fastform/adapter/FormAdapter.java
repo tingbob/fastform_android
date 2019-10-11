@@ -360,9 +360,13 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 FormElementTextNumberStatistic statistic = (FormElementTextNumberStatistic)f;
                 if (statistic.getStatisticTags() != null) {
                     for (String tag : statistic.getStatisticTags()) {
-                        FormElementTextNumber textNumber = (FormElementTextNumber)getElementByTag(tag);
+                        FormElementObject textNumber = getElementByTag(tag);
                         if (textNumber != null) {
-                            textNumber.setRelatedStatisticTag(statistic.getTag());
+                            if (textNumber instanceof FormElementTextNumber) {
+                                ((FormElementTextNumber)textNumber).setRelatedStatisticTag(statistic.getTag());
+                            } else if (textNumber instanceof FormElementTextNumberStatistic) {
+                                ((FormElementTextNumberStatistic)textNumber).setRelatedStatisticTag(statistic.getTag());
+                            }
                         } else {
                             statistic.getStatisticTags().remove(tag);
                         }
@@ -375,6 +379,14 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     public void updateValueStatistic(String tag) {
         int pos = getPositionByTag(tag);
         notifyItemChanged(pos);
+        FormElementObject object = getElementByTag(tag);
+        if (object instanceof FormElementTextNumberStatistic) {
+            FormElementTextNumberStatistic statistic = (FormElementTextNumberStatistic)object;
+            if (!TextUtils.isEmpty(statistic.getRelatedStatisticTag())) {
+                int posStatistic = getPositionByTag(statistic.getRelatedStatisticTag());
+                notifyItemChanged(posStatistic);
+            }
+        }
     }
 
     /**

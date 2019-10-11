@@ -19,6 +19,7 @@ public class FormElementTextNumberStatistic implements FormElementObject<FormEle
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
     private List<String> mStatisticTags;
+    private String mRelatedStatisticTag;
 
     public static FormElementTextNumberStatistic createInstance() {
         FormElementTextNumberStatistic FormElementTextNumberStatistic = new FormElementTextNumberStatistic();
@@ -109,6 +110,15 @@ public class FormElementTextNumberStatistic implements FormElementObject<FormEle
 
     public FormElementTextNumberStatistic setStatisticTags(List<String> list) {
         this.mStatisticTags = list;
+        return this;
+    }
+
+    public String getRelatedStatisticTag() {
+        return mRelatedStatisticTag;
+    }
+
+    public FormElementTextNumberStatistic setRelatedStatisticTag(String tag) {
+        this.mRelatedStatisticTag = tag;
         return this;
     }
     

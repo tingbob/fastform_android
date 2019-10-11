@@ -52,7 +52,7 @@
                 android:background="@drawable/bg_attach_upload"
                 tools:text="Click to upload"
                 android:textSize="@dimen/elementTextTitleSize"
-                android:textColor="@color/colorFormMasterElementBackground"/>
+                android:textColor="@color/colorFormMasterButtonText"/>
 
             <View
                 android:layout_width="match_parent"
