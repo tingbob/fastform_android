@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">fastform</string>
     <string name="element_required">*</string>
+    <string name="should_input">%1$s项需要填写</string>
 </resources>

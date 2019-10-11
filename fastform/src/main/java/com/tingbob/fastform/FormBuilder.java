@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -110,10 +111,14 @@ public class FormBuilder {
      *
      * @return
      */
-    public boolean isValidForm() {
+    public boolean isValidForm(Context context) {
         for (int i = 0; i < this.mFormAdapter.getItemCount(); i++) {
             FormElementObject formElementObject = this.mFormAdapter.getElement(i);
             if (formElementObject.isRequired() && TextUtils.isEmpty(formElementObject.getValue())) {
+                Toast.makeText(context,
+                        String.format(context.getString(R.string.should_input), formElementObject.getTitle()),
+                        Toast.LENGTH_LONG)
+                        .show();
                 return false;
             }
         }
