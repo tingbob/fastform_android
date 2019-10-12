@@ -17,6 +17,7 @@ import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.listener.OnRemoveClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 
 /** Wrapper class around the adapter to assist in building form
@@ -80,6 +81,10 @@ public class FormBuilder {
         mFormAdapter.setOnAttachAddClickListener(onAttachAddClickListener);
     }
 
+    public void setOnRemoveClickListener(OnRemoveClickListener onRemoveClickListener) {
+        mFormAdapter.setOnRemoveClickListener(onRemoveClickListener);
+    }
+
     /**
      * add list of form elements to be shown
      * @param formElementObjects
@@ -103,6 +108,10 @@ public class FormBuilder {
      */
     public FormElementObject getFormElement(String tag) {
         return this.mFormAdapter.getElementByTag(tag);
+    }
+
+    public FormElementObject getFormElementPos(int pos) {
+        return this.mFormAdapter.getElement(pos);
     }
 
     /**

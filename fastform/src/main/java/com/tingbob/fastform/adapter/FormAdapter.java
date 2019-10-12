@@ -19,6 +19,7 @@ import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnHeaderDelClickListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.listener.OnRemoveClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
@@ -69,6 +70,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private OnImageAddClickListener onImageAddClickListener;
     private OnButtonClickListener onButtonClickListener;
     private OnAttachAddClickListener onAttachAddClickListener;
+    private OnRemoveClickListener onRemoveClickListener;
 
     /**
      * public constructor with context
@@ -95,6 +97,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         this.onAttachAddClickListener = onAttachAddClickListener;
     }
 
+    public void setOnRemoveClickListener(OnRemoveClickListener onRemoveClickListener) {
+        this.onRemoveClickListener = onRemoveClickListener;
+    }
+
     private OnHeaderDelClickListener onHeaderDelClickListener = new OnHeaderDelClickListener() {
         @Override
         public void onHeaderDelClick(String tag) {
@@ -103,9 +109,15 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             if (tags == null || tags.isEmpty()) {
                 return;
             }
+
+            if (onRemoveClickListener != null) {
+                onRemoveClickListener.onRemoveClick(tags);
+            }
+
             for (String relatedTag : tags) {
                 mDataset.remove(getElementByTag(relatedTag));
             }
+
             updateRelatedStatisticTags();
             notifyDataSetChanged();
         }
@@ -216,6 +228,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 formElementTextNumberStatistic.getStatisticTags().add(formElementTextNumber.getTag());
             }
             notifyDataSetChanged();
+            if (onButtonClickListener != null) {
+                onButtonClickListener.onButtonClick(tag, relatedTags);
+            }
         }
     };
 
@@ -493,7 +508,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             }
             case IFormElementType.TYPE_BUTTON: {
                 return new FormElementButtonViewHolder(inflater.inflate(R.layout.form_element_button, parent, false),
-                        onButtonClickListener, onButtonAddClickListener);
+                        onButtonAddClickListener);
             }
             case IFormElementType.TYPE_PICKER_ATTACH: {
                 return new FormElementPickerAttachViewHolder(inflater.inflate(R.layout.form_element_attach, parent, false),

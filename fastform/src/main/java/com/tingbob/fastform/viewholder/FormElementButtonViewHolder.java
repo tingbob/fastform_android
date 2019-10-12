@@ -15,14 +15,12 @@ import com.tingbob.fastform.model.FormElementObject;
 
 public class FormElementButtonViewHolder extends BaseViewHolder {
 
-    private OnButtonClickListener onButtonClickListener;
     private OnButtonAddClickListener onButtonAddClickListener;
 
     public AppCompatTextView mTextViewButtonValue;
 
-    public FormElementButtonViewHolder(View v, OnButtonClickListener onButtonClickListener, OnButtonAddClickListener onButtonAddClickListener) {
+    public FormElementButtonViewHolder(View v, OnButtonAddClickListener onButtonAddClickListener) {
         super(v);
-        this.onButtonClickListener = onButtonClickListener;
         this.onButtonAddClickListener = onButtonAddClickListener;
         mTextViewButtonValue = v.findViewById(R.id.formElementValue);
     }
@@ -33,10 +31,6 @@ public class FormElementButtonViewHolder extends BaseViewHolder {
         mTextViewButtonValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onButtonClickListener != null) {
-                    onButtonClickListener.onButtonClick(formElement.getTag());
-                }
-
                 if (onButtonAddClickListener != null) {
                     onButtonAddClickListener.onButtonAddClick(formElement.getTag());
                 }

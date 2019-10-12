@@ -11,6 +11,7 @@ import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.listener.OnRemoveClickListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerAttach;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageAddClickListener, OnButtonClickListener, OnAttachAddClickListener {
+        OnImageAddClickListener, OnButtonClickListener, OnAttachAddClickListener, OnRemoveClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         mRecyclerView = findViewById(R.id.recyclerView);
         mFormBuilder = new FormBuilder(this, mRecyclerView);
         mFormBuilder.setOnFormElementValueChangeListener(this);
+        mFormBuilder.setOnRemoveClickListener(this);
 
         FormHeader header1 = FormHeader.createInstance().setTitle("Personal Info").setTag("1");
         FormElementTextEmail element11 = FormElementTextEmail.createInstance().setTag("11").setTitle("Email").setHint("Enter Email").setRequired(true);
@@ -149,12 +151,17 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     }
 
     @Override
-    public void onButtonClick(String tag) {
-        Toast.makeText(this, "Add Button Click tag = " + tag, Toast.LENGTH_SHORT).show();
+    public void onButtonClick(String buttonTag, List<String> tags) {
+        Toast.makeText(this, "add first tag = " + tags.get(0), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onAttachAddClick(String tag) {
         Toast.makeText(this, "Attach Upload Click tag = " + tag, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRemoveClick(List<String> tags) {
+        Toast.makeText(this, "remove first tag = " + tags.get(0), Toast.LENGTH_SHORT).show();
     }
 }
