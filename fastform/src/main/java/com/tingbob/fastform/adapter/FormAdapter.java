@@ -40,8 +40,10 @@ import com.tingbob.fastform.model.FormElementTextSingleLine;
 import com.tingbob.fastform.model.FormHeader;
 import com.tingbob.fastform.utils.Utils;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
+import com.tingbob.fastform.viewholder.FormElementAttachNormalViewHolder;
 import com.tingbob.fastform.viewholder.FormElementButtonViewHolder;
 import com.tingbob.fastform.viewholder.FormElementHeader;
+import com.tingbob.fastform.viewholder.FormElementImageMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerAttachViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerDateViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerImageMultiViewHolder;
@@ -51,6 +53,7 @@ import com.tingbob.fastform.viewholder.FormElementPickerTimeViewHolder;
 import com.tingbob.fastform.viewholder.FormElementSwitchViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextEmailViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextMultiLineViewHolder;
+import com.tingbob.fastform.viewholder.FormElementTextNormalViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextNumberStatisticViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextNumberViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPasswordViewHolder;
@@ -511,8 +514,17 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                         onButtonAddClickListener);
             }
             case IFormElementType.TYPE_PICKER_ATTACH: {
-                return new FormElementPickerAttachViewHolder(inflater.inflate(R.layout.form_element_attach, parent, false),
+                return new FormElementPickerAttachViewHolder(inflater.inflate(R.layout.form_element_attach_picker, parent, false),
                         onAttachAddClickListener);
+            }
+            case IFormElementType.TYPE_TEXT_NORMAL: {
+                return new FormElementTextNormalViewHolder(inflater.inflate(R.layout.form_element_normal, parent, false));
+            }
+            case IFormElementType.TYPE_IMAGE_NORMAL: {
+                return new FormElementImageMultiViewHolder(inflater.inflate(R.layout.form_element_imageview_multiple_picker, parent, false));
+            }
+            case IFormElementType.TYPE_ATTACH_NORMAL: {
+                return new FormElementAttachNormalViewHolder(inflater.inflate(R.layout.form_element_attach_normal, parent, false));
             }
             default:
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),
