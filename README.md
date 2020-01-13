@@ -7,7 +7,7 @@ universal form
 ## Installation
 Add this in your app's **build.gradle** file:
 ```
-implementation 'com.tingbob.fastform:fastform:1.0.13'
+implementation 'com.tingbob.fastform:fastform:1.0.14'
 ```
 ## Upload Jcenter operator line
 Input the line in Terminal:
