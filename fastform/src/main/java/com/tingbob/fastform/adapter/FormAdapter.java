@@ -562,18 +562,23 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         }
         FormElementTextNumberStatistic formStatistic = (FormElementTextNumberStatistic)currentObject;
         double statistic = 0;
-        int inputType = IFormElementType.TYPE_EDITTEXT_NUMBER_INT;
+        int inputType = 0;
         if (formStatistic.getStatisticTags() != null) {
             for (String tag : formStatistic.getStatisticTags()) {
-                FormElementTextNumber formElementTextNumber = (FormElementTextNumber)getElementByTag(tag);
-                if (formElementTextNumber.getInputType() == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
-                    inputType = formElementTextNumber.getInputType();
+                FormElementObject formElementObject = getElementByTag(tag);
+                String value = formElementObject.getValue();
+                if (formElementObject instanceof FormElementTextNumber) {
+                    FormElementTextNumber formElementTextNumber = (FormElementTextNumber)formElementObject;
+                    if (formElementTextNumber.getInputType() == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
+                        inputType = formElementTextNumber.getInputType();
+                    }
+                    if (value.contains(".") && value.indexOf(".") == value.length() - 1) {
+                        value = value.substring(0, value.indexOf("."));
+                    }
+                    statistic = Arith.add(statistic, TextUtils.isEmpty(value) ? 0 : Double.valueOf(value));
+                } else {
+                    statistic += TextUtils.isEmpty(value) ? 0 : Double.valueOf(value);
                 }
-                String value = formElementTextNumber.getValue();
-                if (value.contains(".") && value.indexOf(".") == value.length() - 1) {
-                    value = value.substring(0, value.indexOf("."));
-                }
-                statistic = Arith.add(statistic, TextUtils.isEmpty(value) ? 0 : Double.valueOf(value));
             }
         }
         String value = String.valueOf(statistic);
