@@ -569,9 +569,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 String value = formElementObject.getValue();
                 if (formElementObject instanceof FormElementTextNumber) {
                     FormElementTextNumber formElementTextNumber = (FormElementTextNumber)formElementObject;
-                    if (formElementTextNumber.getInputType() == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
-                        inputType = formElementTextNumber.getInputType();
-                    }
+                    inputType = formElementTextNumber.getInputType();
                     if (value.contains(".") && value.indexOf(".") == value.length() - 1) {
                         value = value.substring(0, value.indexOf("."));
                     }
