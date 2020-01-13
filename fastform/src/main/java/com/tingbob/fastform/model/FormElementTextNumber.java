@@ -17,6 +17,7 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
     private String mRelatedStatisticTag;
+    private int mInputType;
 
     public static FormElementTextNumber createInstance() {
         FormElementTextNumber FormElementTextNumber = new FormElementTextNumber();
@@ -109,5 +110,13 @@ public class FormElementTextNumber implements FormElementObject<FormElementTextN
         this.mRelatedStatisticTag = tag;
         return this;
     }
-    
+
+    public int getInputType() {
+        return mInputType;
+    }
+
+    public FormElementTextNumber setInputType(int inputType) {
+        this.mInputType = inputType;
+        return this;
+    }
 }

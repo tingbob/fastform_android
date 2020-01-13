@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ import com.tingbob.fastform.model.FormElementTextPassword;
 import com.tingbob.fastform.model.FormElementTextPhone;
 import com.tingbob.fastform.model.FormElementTextSingleLine;
 import com.tingbob.fastform.model.FormHeader;
+import com.tingbob.fastform.utils.Arith;
 import com.tingbob.fastform.utils.Utils;
 import com.tingbob.fastform.viewholder.BaseViewHolder;
 import com.tingbob.fastform.viewholder.FormElementAttachNormalViewHolder;
@@ -559,14 +561,30 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             return;
         }
         FormElementTextNumberStatistic formStatistic = (FormElementTextNumberStatistic)currentObject;
-        int statistic = 0;
+        double statistic = 0;
+        int inputType = IFormElementType.TYPE_EDITTEXT_NUMBER_INT;
         if (formStatistic.getStatisticTags() != null) {
             for (String tag : formStatistic.getStatisticTags()) {
-                String value = getValueAtTag(tag);
-                statistic += TextUtils.isEmpty(value) ? 0 : Float.valueOf(value);
+                FormElementTextNumber formElementTextNumber = (FormElementTextNumber)getElementByTag(tag);
+                if (formElementTextNumber.getInputType() == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
+                    inputType = formElementTextNumber.getInputType();
+                }
+                String value = formElementTextNumber.getValue();
+                if (value.contains(".") && value.indexOf(".") == value.length() - 1) {
+                    value = value.substring(0, value.indexOf("."));
+                }
+                statistic = Arith.add(statistic, TextUtils.isEmpty(value) ? 0 : Double.valueOf(value));
             }
         }
-        formStatistic.setValue(String.valueOf(statistic));
+        String value = String.valueOf(statistic);
+        if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+            value = decimalFormat.format(statistic);
+        } else if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_INT) {
+            value = value.substring(0, value.indexOf("."));
+        }
+
+        formStatistic.setValue(value);
     }
 
     /**

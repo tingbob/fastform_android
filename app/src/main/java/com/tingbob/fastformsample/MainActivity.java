@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.tingbob.fastform.FormBuilder;
+import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
@@ -72,12 +73,14 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormHeader header2 = FormHeader.createInstance().setTag("2").setTitle("Family Info");
         FormElementTextSingleLine element21 = FormElementTextSingleLine.createInstance().setTag("21").setTitle("Location").setValue("Dhaka").setRequired(true);
         FormElementTextMultiLine element22 = FormElementTextMultiLine.createInstance().setTag("22").setTitle("Address");
-        FormElementTextNumber element23 = FormElementTextNumber.createInstance().setTag("23").setTitle("Zip Code").setValue("1000");
-        FormElementTextNumber element24 = FormElementTextNumber.createInstance().setTag("24").setTitle("Zip2 Code").setValue("2000");
+        FormElementTextNumber element23 = FormElementTextNumber.createInstance().setTag("23").setTitle("Zip Code").setValue("1000").setInputType(IFormElementType.TYPE_EDITTEXT_NUMBER_INT);
+        FormElementTextNumber element24 = FormElementTextNumber.createInstance().setTag("24").setTitle("Zip2 Code").setValue("2000").setInputType(IFormElementType.TYPE_EDITTEXT_NUMBER_INT);
+        FormElementTextNumber element25 = FormElementTextNumber.createInstance().setTag("25").setTitle("Zip3 Code").setValue("3000").setInputType(IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL);
         List<String> list = new ArrayList<>();
         list.add("23");
         list.add("24");
-        FormElementTextNumberStatistic element25 = FormElementTextNumberStatistic.createInstance().setTag("25").setTitle("Statistic").setStatisticTags(list);
+        list.add("25");
+        FormElementTextNumberStatistic element26 = FormElementTextNumberStatistic.createInstance().setTag("26").setTitle("Statistic").setStatisticTags(list);
 
         FormHeader header3 = FormHeader.createInstance().setTag("3").setTitle("Schedule");
         FormElementPickerDate element31 = FormElementPickerDate.createInstance().setTag("31").setTitle("Date").setDateFormat("MMM dd, yyyy");
@@ -125,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         formItems.add(element23);
         formItems.add(element24);
         formItems.add(element25);
+        formItems.add(element26);
         formItems.add(header3);
         formItems.add(element31);
         formItems.add(element32);

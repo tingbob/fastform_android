@@ -21,4 +21,6 @@ public interface IFormElementType {
     int TYPE_TEXT_NORMAL = 16;
     int TYPE_IMAGE_NORMAL = 17;
     int TYPE_ATTACH_NORMAL = 18;
+    int TYPE_EDITTEXT_NUMBER_INT = 19;
+    int TYPE_EDITTEXT_NUMBER_DECIMAL = 20;
 }
