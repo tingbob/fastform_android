@@ -19,6 +19,7 @@ public class FormElementButton implements FormElementObject<FormElementButton> {
     private String mHint; // value to be shown if mValue is null
     private boolean mRequired; // value to set is the field is required
     private List<FormElementObject> mActionAddElements; // action add group elements; start from header to the pre element of this button.
+    private int mAddedCount;
 
     public static FormElementButton createInstance() {
         FormElementButton form = new FormElementButton();
@@ -109,6 +110,15 @@ public class FormElementButton implements FormElementObject<FormElementButton> {
 
     public FormElementButton setActionAddElements(List<FormElementObject> list) {
         this.mActionAddElements = list;
+        return this;
+    }
+
+    public int getAddedCount() {
+        return mAddedCount;
+    }
+
+    public FormElementButton addCount() {
+        mAddedCount++;
         return this;
     }
 }

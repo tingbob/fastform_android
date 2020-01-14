@@ -224,7 +224,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 formElement.setRequired(formElementObject.isRequired());
                 addElement(index + i, formElement);
             }
+            formElementButton.addCount();
             if (formHeader != null && !relatedTags.isEmpty()) {
+                formHeader.setTitle(formHeader.getTitle() + formElementButton.getAddedCount());
                 formHeader.setRelatedTags(relatedTags);
             }
 
