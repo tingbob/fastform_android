@@ -1,5 +1,7 @@
 package com.tingbob.fastform.utils;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
@@ -7,8 +9,9 @@ import android.text.method.DigitsKeyListener;
 public class MoneyValueFilter extends DigitsKeyListener {
 
     private static final String TAG = "MoneyValueFilter";
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public MoneyValueFilter() {
-        super(false, true);
+        super(null, false, true);
     }
 
     private int digits = 2;
