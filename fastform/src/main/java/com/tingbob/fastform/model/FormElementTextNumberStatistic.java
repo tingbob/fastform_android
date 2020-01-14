@@ -20,6 +20,7 @@ public class FormElementTextNumberStatistic implements FormElementObject<FormEle
     private boolean mRequired; // value to set is the field is required
     private List<String> mStatisticTags;
     private String mRelatedStatisticTag;
+    private int mInputType;
 
     public static FormElementTextNumberStatistic createInstance() {
         FormElementTextNumberStatistic FormElementTextNumberStatistic = new FormElementTextNumberStatistic();
@@ -121,5 +122,13 @@ public class FormElementTextNumberStatistic implements FormElementObject<FormEle
         this.mRelatedStatisticTag = tag;
         return this;
     }
-    
+
+    public int getInputType() {
+        return mInputType;
+    }
+
+    public FormElementTextNumberStatistic setInputType(int inputType) {
+        this.mInputType = inputType;
+        return this;
+    }
 }

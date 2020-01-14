@@ -570,15 +570,17 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 if (formElementObject instanceof FormElementTextNumber) {
                     FormElementTextNumber formElementTextNumber = (FormElementTextNumber)formElementObject;
                     inputType = formElementTextNumber.getInputType();
-                    if (value.contains(".") && value.indexOf(".") == value.length() - 1) {
-                        value = value.substring(0, value.indexOf("."));
-                    }
-                    statistic = Arith.add(statistic, TextUtils.isEmpty(value) ? 0 : Double.valueOf(value));
-                } else {
-                    statistic += TextUtils.isEmpty(value) ? 0 : Double.valueOf(value);
+                } else if (formElementObject instanceof FormElementTextNumberStatistic) {
+                    FormElementTextNumberStatistic formElementTextNumberStatistic = (FormElementTextNumberStatistic)formElementObject;
+                    inputType = formElementTextNumberStatistic.getInputType();
                 }
+                if (value.contains(".") && value.indexOf(".") == value.length() - 1) {
+                    value = value.substring(0, value.indexOf("."));
+                }
+                statistic = Arith.add(statistic, TextUtils.isEmpty(value) ? 0 : Double.valueOf(value));
             }
         }
+        formStatistic.setInputType(inputType);
         String value = String.valueOf(statistic);
         if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
             DecimalFormat decimalFormat = new DecimalFormat("0.00");
