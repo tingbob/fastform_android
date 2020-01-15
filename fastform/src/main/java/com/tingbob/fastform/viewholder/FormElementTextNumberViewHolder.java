@@ -1,11 +1,13 @@
 package com.tingbob.fastform.viewholder;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.method.DialerKeyListener;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -43,12 +45,13 @@ public class FormElementTextNumberViewHolder extends BaseViewHolder {
         return mFormCustomEditTextListener;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void bind(int position, FormElementObject formElement, final Context context) {
         inputType = ((FormElementTextNumber)formElement).getInputType();
         if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_INT) {
             mEditTextValue.setRawInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-            mEditTextValue.setFilters(new InputFilter[]{new DialerKeyListener()});
+            mEditTextValue.setFilters(new InputFilter[]{new DigitsKeyListener(null, false, false)});
         } else if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
             mEditTextValue.setRawInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
             mEditTextValue.setFilters(new InputFilter[]{new MoneyValueFilter()});
