@@ -9,9 +9,9 @@ import android.text.method.DigitsKeyListener;
 public class MoneyValueFilter extends DigitsKeyListener {
 
     private static final String TAG = "MoneyValueFilter";
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     public MoneyValueFilter() {
-        super(null, false, true);
+        super(false, true);
     }
 
     private int digits = 2;

@@ -45,13 +45,12 @@ public class FormElementTextNumberViewHolder extends BaseViewHolder {
         return mFormCustomEditTextListener;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void bind(int position, FormElementObject formElement, final Context context) {
         inputType = ((FormElementTextNumber)formElement).getInputType();
         if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_INT) {
             mEditTextValue.setRawInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-            mEditTextValue.setFilters(new InputFilter[]{new DigitsKeyListener(null, false, false)});
+            mEditTextValue.setFilters(new InputFilter[]{new DigitsKeyListener()});
         } else if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
             mEditTextValue.setRawInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
             mEditTextValue.setFilters(new InputFilter[]{new MoneyValueFilter()});
