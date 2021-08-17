@@ -1,9 +1,10 @@
 package com.tingbob.fastform.viewholder;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.OnHeaderDelClickListener;

@@ -2,9 +2,10 @@ package com.tingbob.fastform.viewholder;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.DatePicker;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

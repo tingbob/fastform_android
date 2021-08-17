@@ -1,11 +1,13 @@
 package com.tingbob.fastform.viewholder;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.adapter.ImageCardAdapter;
 import com.tingbob.fastform.listener.OnImageAddClickListener;

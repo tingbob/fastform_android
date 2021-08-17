@@ -1,10 +1,11 @@
 package com.tingbob.fastform.viewholder;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
+
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.listener.ReloadListener;
