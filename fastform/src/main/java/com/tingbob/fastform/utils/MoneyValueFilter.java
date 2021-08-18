@@ -5,12 +5,14 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
 
+import java.util.Locale;
+
 public class MoneyValueFilter extends DigitsKeyListener {
 
     private static final String TAG = "MoneyValueFilter";
 
     public MoneyValueFilter() {
-        super(false, true);
+        super(Locale.getDefault(), false, true);
     }
 
     private int digits = 2;

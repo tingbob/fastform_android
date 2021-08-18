@@ -18,6 +18,8 @@ import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementTextNumber;
 import com.tingbob.fastform.utils.MoneyValueFilter;
 
+import java.util.Locale;
+
 /**
  * Created by tingbob  on 30-Jul-17.
  */
@@ -50,7 +52,7 @@ public class FormElementTextNumberViewHolder extends BaseViewHolder {
         inputType = ((FormElementTextNumber)formElement).getInputType();
         if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_INT) {
             mEditTextValue.setRawInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-            mEditTextValue.setFilters(new InputFilter[]{new DigitsKeyListener()});
+            mEditTextValue.setFilters(new InputFilter[]{new DigitsKeyListener(Locale.getDefault())});
         } else if (inputType == IFormElementType.TYPE_EDITTEXT_NUMBER_DECIMAL) {
             mEditTextValue.setRawInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_CLASS_NUMBER|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
             mEditTextValue.setFilters(new InputFilter[]{new MoneyValueFilter()});

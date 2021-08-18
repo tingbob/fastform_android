@@ -1,13 +1,14 @@
 # fastform
-[ ![Download](https://api.bintray.com/packages/tingbob/maven/fastform/images/download.svg) ](https://bintray.com/tingbob/maven/fastform/_latestVersion)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob/fastform/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob
+/fastform)
 
 universal form
-> Easily build big and bigger forms with minimal effort
+> Easily build big and bigger forms with minimal effort. Support AndroidX.
 
 ## Installation
 Add this in your app's **build.gradle** file:
 ```
-implementation 'com.tingbob.fastform:fastform:1.0.19'
+implementation 'io.github.tingbob:fastform:1.0.20'
 ```
 ## Upload Jcenter operator line
 Input the line in Terminal:
