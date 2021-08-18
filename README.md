@@ -1,6 +1,5 @@
 # fastform
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob/fastform/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob
-/fastform)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob/fastform/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob/fastform)
 
 universal form
 > Easily build big and bigger forms with minimal effort. Support AndroidX.
