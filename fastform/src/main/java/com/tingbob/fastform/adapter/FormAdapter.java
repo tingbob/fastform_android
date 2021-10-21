@@ -22,6 +22,7 @@ import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnHeaderDelClickListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
+import com.tingbob.fastform.listener.OnVideoAddClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
@@ -31,6 +32,7 @@ import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementPickerMulti;
 import com.tingbob.fastform.model.FormElementPickerSingle;
 import com.tingbob.fastform.model.FormElementPickerTime;
+import com.tingbob.fastform.model.FormElementPickerVideoMultiple;
 import com.tingbob.fastform.model.FormElementSwitch;
 import com.tingbob.fastform.model.FormElementTextEmail;
 import com.tingbob.fastform.model.FormElementTextMultiLine;
@@ -53,6 +55,7 @@ import com.tingbob.fastform.viewholder.FormElementPickerImageMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerSingleViewHolder;
 import com.tingbob.fastform.viewholder.FormElementPickerTimeViewHolder;
+import com.tingbob.fastform.viewholder.FormElementPickerVideoMultiViewHolder;
 import com.tingbob.fastform.viewholder.FormElementSwitchViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextEmailViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextMultiLineViewHolder;
@@ -62,6 +65,7 @@ import com.tingbob.fastform.viewholder.FormElementTextNumberViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPasswordViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPhoneViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextSingleLineViewHolder;
+import com.tingbob.fastform.viewholder.FormElementVideoMultiViewHolder;
 
 /**
  * The adapter the holds and displays the form objects
@@ -74,6 +78,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private List<FormElementObject> mDataset;
     private OnFormElementValueChangedListener mListener;
     private OnImageAddClickListener onImageAddClickListener;
+    private OnVideoAddClickListener onVideoAddClickListener;
     private OnButtonClickListener onButtonClickListener;
     private OnAttachAddClickListener onAttachAddClickListener;
     private OnRemoveClickListener onRemoveClickListener;
@@ -93,6 +98,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
 
     public void setOnImageAddClickListener(OnImageAddClickListener onImageAddClickListener) {
         this.onImageAddClickListener = onImageAddClickListener;
+    }
+
+    public void setOnVideoAddClickListener(OnVideoAddClickListener onVideoAddClickListener) {
+        this.onVideoAddClickListener = onVideoAddClickListener;
     }
 
     public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
@@ -205,6 +214,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                     }
                     case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
                         formElement = FormElementPickerImageMultiple.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_PICKER_VIDEO_MULTIPLE: {
+                        formElement = FormElementPickerVideoMultiple.createInstance();
                         break;
                     }
                     case IFormElementType.TYPE_PICKER_ATTACH: {
@@ -511,8 +524,12 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 return new FormElementTextNumberStatisticViewHolder(inflater.inflate(R.layout.form_element_number_statistic, parent, false));
             }
             case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
-                return new FormElementPickerImageMultiViewHolder(inflater.inflate(R.layout.form_element_imageview_multiple_picker, parent, false),
+                return new FormElementPickerImageMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false),
                         onImageAddClickListener);
+            }
+            case IFormElementType.TYPE_PICKER_VIDEO_MULTIPLE: {
+                return new FormElementPickerVideoMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false),
+                        onVideoAddClickListener);
             }
             case IFormElementType.TYPE_BUTTON: {
                 return new FormElementButtonViewHolder(inflater.inflate(R.layout.form_element_button, parent, false),
@@ -526,7 +543,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 return new FormElementTextNormalViewHolder(inflater.inflate(R.layout.form_element_normal, parent, false));
             }
             case IFormElementType.TYPE_IMAGE_NORMAL: {
-                return new FormElementImageMultiViewHolder(inflater.inflate(R.layout.form_element_imageview_multiple_picker, parent, false));
+                return new FormElementImageMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false));
+            }
+            case IFormElementType.TYPE_VIDEO_NORMAL: {
+                return new FormElementVideoMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false));
             }
             case IFormElementType.TYPE_ATTACH_NORMAL: {
                 return new FormElementAttachNormalViewHolder(inflater.inflate(R.layout.form_element_attach_normal, parent, false));

@@ -19,6 +19,7 @@ import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
+import com.tingbob.fastform.listener.OnVideoAddClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 
 /** Wrapper class around the adapter to assist in building form
@@ -72,6 +73,10 @@ public class FormBuilder {
 
     public void setOnImageClickListener(OnImageAddClickListener onImageAddClickListener) {
         mFormAdapter.setOnImageAddClickListener(onImageAddClickListener);
+    }
+
+    public void setOnVideoClickListener(OnVideoAddClickListener onVideoAddClickListener) {
+        mFormAdapter.setOnVideoAddClickListener(onVideoAddClickListener);
     }
 
     public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {

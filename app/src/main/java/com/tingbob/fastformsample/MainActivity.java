@@ -15,6 +15,7 @@ import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageAddClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
+import com.tingbob.fastform.listener.OnVideoAddClickListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerAttach;
@@ -23,6 +24,7 @@ import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 import com.tingbob.fastform.model.FormElementPickerMulti;
 import com.tingbob.fastform.model.FormElementPickerSingle;
 import com.tingbob.fastform.model.FormElementPickerTime;
+import com.tingbob.fastform.model.FormElementPickerVideoMultiple;
 import com.tingbob.fastform.model.FormElementSwitch;
 import com.tingbob.fastform.model.FormElementTextEmail;
 import com.tingbob.fastform.model.FormElementTextMultiLine;
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageAddClickListener, OnButtonClickListener, OnAttachAddClickListener, OnRemoveClickListener {
+        OnImageAddClickListener, OnVideoAddClickListener, OnButtonClickListener, OnAttachAddClickListener, OnRemoveClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -109,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormElementPickerAttach element52 = FormElementPickerAttach.createInstance().setTag("52").setTitle("Attach").setValue("Click to upload").setListValue(names);
         mFormBuilder.setOnAttachUploadClickListener(this);
 
+        List<String> videoThumbs = new ArrayList<>();
+        videoThumbs.add("https://file02.16sucai.com/d/file/2014/0829/372edfeb74c3119b666237bd4af92be5.jpg");
+        FormElementPickerVideoMultiple element53 = FormElementPickerVideoMultiple.createInstance().setTag("53").setTitle("Video Picker").setListValue(videoThumbs);
+        mFormBuilder.setOnVideoClickListener(this);
+
         FormElementButton element61 = FormElementButton.createInstance().setTag("61").setValue("+ Add a group");
         List<FormElementObject> objects = new ArrayList<>();
         objects.add(header4);
@@ -117,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         objects.add(element43);
         objects.add(element51);
         objects.add(element52);
+        objects.add(element53);
         element61.setActionAddElements(objects);
         mFormBuilder.setOnButtonClickListener(this);
 
@@ -141,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         formItems.add(element43);
         formItems.add(element51);
         formItems.add(element52);
+        formItems.add(element53);
         formItems.add(element61);
         mFormBuilder.addFormElements(formItems);
 
@@ -154,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     @Override
     public void onImageAddClick(String tag) {
         Toast.makeText(this, "Add Image Click tag = " + tag, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onVideoAddClick(String tag) {
+        Toast.makeText(this, "Add Video Click tag = " + tag, Toast.LENGTH_SHORT).show();
     }
 
     @Override

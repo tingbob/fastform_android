@@ -1,21 +1,26 @@
 # fastform
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob/fastform/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.tingbob/fastform)
 
-universal form
+## universal form
 > Easily build big and bigger forms with minimal effort. Support AndroidX.
+
+## Effect
 
 ## Installation
 Add this in your app's **build.gradle** file:
 ```
-implementation 'io.github.tingbob:fastform:1.0.20'
+implementation 'io.github.tingbob:fastform:1.0.21'
 ```
-## Upload Jcenter operator line
-Input the line in Terminal:
+## Upload mavenCentral operator step
 ```
-./gradlew javadocJar
-./gradlew sourcesJar
-./gradlew install
-./gradlew bintrayUpload
+1. click 'publishMavenJavaPublishingToMavenRepository' to implement gradle task in fastform module
+2. login https://s01.oss.sonatype.org
+3. click 'Staging Repositories' of left menu to find published lib
+4. click 'close' after selecting the published lib
+5. wait about 1 minute
+6. click 'release' while selecting the published lib
+7. use the lib on mavenCentral
+
 ```
 
 License
