@@ -144,6 +144,10 @@ public class FormBuilder {
         mFormAdapter.updateImagePaths(tag, imagePaths);
     }
 
+    public void updateVideoPaths(String tag, List<String> videoPaths) {
+        mFormAdapter.updateVideoPaths(tag, videoPaths);
+    }
+
     public void updateAttachList(String tag, List<String> attachList) {
         mFormAdapter.updateAttachList(tag, attachList);
     }

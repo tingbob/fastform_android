@@ -9,7 +9,7 @@
 ## Installation
 Add this in your app's **build.gradle** file:
 ```
-implementation 'io.github.tingbob:fastform:1.0.21'
+implementation 'io.github.tingbob:fastform:1.0.22'
 ```
 ## Upload mavenCentral operator step
 ```

@@ -637,6 +637,15 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         notifyItemChanged(getPositionByTag(tag));
     }
 
+    public void updateVideoPaths(String tag, List<String> videoPaths) {
+        if (videoPaths == null || videoPaths.isEmpty()) {
+            return;
+        }
+        FormElementPickerVideoMultiple formElement = (FormElementPickerVideoMultiple)getElementByTag(tag);
+        formElement.setListValue(videoPaths);
+        notifyItemChanged(getPositionByTag(tag));
+    }
+
     public void updateAttachList(String tag, List<String> attachList) {
         if (attachList == null || attachList.isEmpty()) {
             return;
