@@ -13,7 +13,7 @@ implementation 'io.github.tingbob:fastform:1.0.21'
 ```
 ## Upload mavenCentral operator step
 ```
-1. click 'publishMavenJavaPublishingToMavenRepository' to implement gradle task in fastform module
+1. click 'publishAllPublicationsToMavenRepository' to implement gradle task in fastform module
 2. login https://s01.oss.sonatype.org
 3. click 'Staging Repositories' of left menu to find published lib
 4. click 'close' after selecting the published lib
