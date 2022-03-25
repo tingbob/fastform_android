@@ -100,6 +100,15 @@ public class FormBuilder {
     }
 
     /**
+     * fill list of form elements to be shown
+     * @param formElementObjects
+     */
+    public void fillFormElements(List<FormElementObject> formElementObjects) {
+        this.mFormAdapter.fillElements(formElementObjects);
+    }
+
+
+    /**
      * add list of form elements of the position to be shown
      * @param formElementObjects
      */

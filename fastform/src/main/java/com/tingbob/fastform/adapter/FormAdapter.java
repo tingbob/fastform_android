@@ -266,6 +266,15 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     }
 
     /**
+     * fill list of elements to be show
+     * @param formObjects
+     */
+    public void fillElements(List<FormElementObject> formObjects) {
+        this.mDataset.clear();
+        addElements(formObjects);
+    }
+
+    /**
      * adds list of elements of the position to be shown
      *
      * @param index
