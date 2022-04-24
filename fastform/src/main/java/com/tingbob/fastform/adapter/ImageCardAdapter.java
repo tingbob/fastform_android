@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tingbob.fastform.R;
-import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.model.FormElementPickerImageMultiple;
 
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
     private Context mContext;
     private List<String> imagesList;
     private final String imageAddBtnUri = "badd";
-    public OnImageAddClickListener onImageAddClickListener;
+    public OnImageClickListener onImageClickListener;
     public FormElementPickerImageMultiple formElement;
 
-    public ImageCardAdapter(Context mContext, FormElementPickerImageMultiple formElement, OnImageAddClickListener onImageAddClickListener) {
+    public ImageCardAdapter(Context mContext, FormElementPickerImageMultiple formElement, OnImageClickListener onImageClickListener) {
         this.mContext = mContext;
         this.formElement = formElement;
-        this.onImageAddClickListener = onImageAddClickListener;
+        this.onImageClickListener = onImageClickListener;
         imagesList = new ArrayList<>();
         if (formElement.getListValue() != null && !formElement.getListValue().isEmpty()) {
             imagesList.addAll(formElement.getListValue());
@@ -89,16 +89,18 @@ public class ImageCardAdapter extends RecyclerView.Adapter<ImageCardAdapter.Imag
 
 
             boolean bAddBtn = (position == getItemCount() - 1);
-            if (bAddBtn) {
-                iv_thumb.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) { onImageAddClickListener.onImageAddClick(formElement.getTag());
+            iv_thumb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onImageClickListener != null) {
+                        if (bAddBtn) {
+                            onImageClickListener.onImageAddClick(formElement.getTag());
+                        } else {
+                            onImageClickListener.onImageItemClick(imagePath);
+                        }
                     }
-                });
-            } else {
-                iv_thumb.setOnClickListener(null);
-            }
-
+                }
+            });
 
             iv_del.setVisibility(bAddBtn ? View.GONE : View.VISIBLE);
             iv_del.setOnClickListener(new View.OnClickListener() {

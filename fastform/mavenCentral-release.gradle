@@ -17,7 +17,7 @@ publishing {
             // 发布后引用的依赖的 artifact id
             artifactId 'fastform'
             // 发布的版本
-            version '1.0.23'
+            version '1.0.24'
             // 发布的 arr 的文件和源码文件
             artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
             artifact androidSourcesJar

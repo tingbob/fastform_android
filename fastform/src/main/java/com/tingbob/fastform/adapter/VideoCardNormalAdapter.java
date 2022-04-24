@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tingbob.fastform.R;
+import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementVideoMultiple;
 
 import java.util.ArrayList;
@@ -20,10 +21,12 @@ public class VideoCardNormalAdapter extends RecyclerView.Adapter<VideoCardNormal
     private Context mContext;
     private List<String> thumbsList;
     public FormElementVideoMultiple formElement;
+    public OnVideoClickListener onVideoClickListener;
 
-    public VideoCardNormalAdapter(Context mContext, FormElementVideoMultiple formElement) {
+    public VideoCardNormalAdapter(Context mContext, FormElementVideoMultiple formElement, OnVideoClickListener onVideoClickListener) {
         this.mContext = mContext;
         this.formElement = formElement;
+        this.onVideoClickListener = onVideoClickListener;
         thumbsList = new ArrayList<>();
         if (formElement.getListValue() != null && !formElement.getListValue().isEmpty()) {
             thumbsList.addAll(formElement.getListValue());
@@ -55,21 +58,40 @@ public class VideoCardNormalAdapter extends RecyclerView.Adapter<VideoCardNormal
     public class VideoCardViewHolder extends RecyclerView.ViewHolder {
         public ImageView iv_thumb;
         public ImageView iv_del;
+        public ImageView iv_video_play;
 
         public VideoCardViewHolder(View view) {
             super(view);
             iv_thumb = view.findViewById(R.id.iv_thumb);
             iv_del = view.findViewById(R.id.iv_del);
+            iv_video_play = view.findViewById(R.id.iv_video_play);
         }
 
         public void updateView(final int position) {
-            String imagePath = getItem(position);
+            String videoPath = getItem(position);
             Glide.with(mContext)
-                    .load(imagePath)
+                    .load(videoPath)
                     .dontAnimate()
                     .into(iv_thumb);
 
+            iv_thumb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onVideoClickListener != null) {
+                        onVideoClickListener.onVideoItemClick(videoPath);
+                    }
+                }
+            });
+
             iv_del.setVisibility(View.GONE);
+            iv_video_play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onVideoClickListener != null) {
+                        onVideoClickListener.onVideoItemClick(videoPath);
+                    }
+                }
+            });
         }
     }
 }

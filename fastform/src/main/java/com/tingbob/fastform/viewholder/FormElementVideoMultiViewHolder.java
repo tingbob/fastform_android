@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.adapter.VideoCardNormalAdapter;
+import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementVideoMultiple;
 
@@ -23,9 +24,11 @@ public class FormElementVideoMultiViewHolder extends BaseViewHolder {
     public AppCompatTextView mTextViewTitle;
     public RecyclerView mRecyclerValue;
     public VideoCardNormalAdapter videoCardAdapter;
+    public OnVideoClickListener videoClickListener;
 
-    public FormElementVideoMultiViewHolder(View v) {
+    public FormElementVideoMultiViewHolder(View v, OnVideoClickListener onVideoClickListener) {
         super(v);
+        this.videoClickListener = onVideoClickListener;
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mRecyclerValue = v.findViewById(R.id.formElementValue);
@@ -38,7 +41,7 @@ public class FormElementVideoMultiViewHolder extends BaseViewHolder {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 2);
         mRecyclerValue.setLayoutManager(layoutManager);
         mRecyclerValue.setItemAnimator(new DefaultItemAnimator());
-        videoCardAdapter = new VideoCardNormalAdapter(itemView.getContext(), (FormElementVideoMultiple) formElement);
+        videoCardAdapter = new VideoCardNormalAdapter(itemView.getContext(), (FormElementVideoMultiple) formElement, videoClickListener);
         mRecyclerValue.setAdapter(videoCardAdapter);
     }
 }

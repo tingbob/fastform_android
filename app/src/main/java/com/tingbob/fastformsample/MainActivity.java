@@ -13,9 +13,9 @@ import com.tingbob.fastform.IFormElementType;
 import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
-import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
-import com.tingbob.fastform.listener.OnVideoAddClickListener;
+import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerAttach;
@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageAddClickListener, OnVideoAddClickListener, OnButtonClickListener, OnAttachAddClickListener, OnRemoveClickListener {
+        OnImageClickListener, OnVideoClickListener, OnButtonClickListener, OnAttachAddClickListener, OnRemoveClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -101,7 +101,9 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         FormElementPickerMulti element42 = FormElementPickerMulti.createInstance().setTag("42").setTitle("Multi Items").setOptions(fruits).setPickerTitle("Pick one or more").setNegativeText("reset");
         FormElementSwitch element43 = FormElementSwitch.createInstance().setTag("43").setTitle("Frozen?").setSwitchTexts("Yes", "No");
 
-        FormElementPickerImageMultiple element51 = FormElementPickerImageMultiple.createInstance().setTag("51").setTitle("Image Picker");
+        List<String> images = new ArrayList<>();
+        images.add("https://file02.16sucai.com/d/file/2014/0829/372edfeb74c3119b666237bd4af92be5.jpg");
+        FormElementPickerImageMultiple element51 = FormElementPickerImageMultiple.createInstance().setTag("51").setTitle("Image Picker").setListValue(images);
         mFormBuilder.setOnImageClickListener(this);
 
         List<String> names = new ArrayList<>();
@@ -168,6 +170,16 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     @Override
     public void onVideoAddClick(String tag) {
         Toast.makeText(this, "Add Video Click tag = " + tag, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onImageItemClick(String url) {
+        Toast.makeText(this, "Image Click url = " + url, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onVideoItemClick(String url) {
+        Toast.makeText(this, "Video Click url = " + url, Toast.LENGTH_SHORT).show();
     }
 
     @Override

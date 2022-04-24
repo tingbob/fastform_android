@@ -20,9 +20,9 @@ import com.tingbob.fastform.listener.OnButtonAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnHeaderDelClickListener;
-import com.tingbob.fastform.listener.OnImageAddClickListener;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
-import com.tingbob.fastform.listener.OnVideoAddClickListener;
+import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
 import com.tingbob.fastform.model.FormElementButton;
 import com.tingbob.fastform.model.FormElementObject;
@@ -77,8 +77,8 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private Context mContext;
     private List<FormElementObject> mDataset;
     private OnFormElementValueChangedListener mListener;
-    private OnImageAddClickListener onImageAddClickListener;
-    private OnVideoAddClickListener onVideoAddClickListener;
+    private OnImageClickListener onImageClickListener;
+    private OnVideoClickListener onVideoClickListener;
     private OnButtonClickListener onButtonClickListener;
     private OnAttachAddClickListener onAttachAddClickListener;
     private OnRemoveClickListener onRemoveClickListener;
@@ -96,12 +96,12 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
         this.mListener = onFormElementValueChangeListener;
     }
 
-    public void setOnImageAddClickListener(OnImageAddClickListener onImageAddClickListener) {
-        this.onImageAddClickListener = onImageAddClickListener;
+    public void setOnImageAddClickListener(OnImageClickListener onImageClickListener) {
+        this.onImageClickListener = onImageClickListener;
     }
 
-    public void setOnVideoAddClickListener(OnVideoAddClickListener onVideoAddClickListener) {
-        this.onVideoAddClickListener = onVideoAddClickListener;
+    public void setOnVideoAddClickListener(OnVideoClickListener onVideoClickListener) {
+        this.onVideoClickListener = onVideoClickListener;
     }
 
     public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
@@ -534,11 +534,11 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             }
             case IFormElementType.TYPE_PICKER_IMAGE_MULTIPLE: {
                 return new FormElementPickerImageMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false),
-                        onImageAddClickListener);
+                        onImageClickListener);
             }
             case IFormElementType.TYPE_PICKER_VIDEO_MULTIPLE: {
                 return new FormElementPickerVideoMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false),
-                        onVideoAddClickListener);
+                        onVideoClickListener);
             }
             case IFormElementType.TYPE_BUTTON: {
                 return new FormElementButtonViewHolder(inflater.inflate(R.layout.form_element_button, parent, false),
@@ -552,10 +552,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                 return new FormElementTextNormalViewHolder(inflater.inflate(R.layout.form_element_normal, parent, false));
             }
             case IFormElementType.TYPE_IMAGE_NORMAL: {
-                return new FormElementImageMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false));
+                return new FormElementImageMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false), onImageClickListener);
             }
             case IFormElementType.TYPE_VIDEO_NORMAL: {
-                return new FormElementVideoMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false));
+                return new FormElementVideoMultiViewHolder(inflater.inflate(R.layout.form_element_imagevideo_multiple_picker, parent, false), onVideoClickListener);
             }
             case IFormElementType.TYPE_ATTACH_NORMAL: {
                 return new FormElementAttachNormalViewHolder(inflater.inflate(R.layout.form_element_attach_normal, parent, false));

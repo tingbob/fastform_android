@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tingbob.fastform.R;
+import com.tingbob.fastform.listener.OnImageClickListener;
 import com.tingbob.fastform.model.FormElementImageMultiple;
 
 import java.util.ArrayList;
@@ -20,10 +21,12 @@ public class ImageCardNormalAdapter extends RecyclerView.Adapter<ImageCardNormal
     private Context mContext;
     private List<String> imagesList;
     public FormElementImageMultiple formElement;
+    public OnImageClickListener onImageClickListener;
 
-    public ImageCardNormalAdapter(Context mContext, FormElementImageMultiple formElement) {
+    public ImageCardNormalAdapter(Context mContext, FormElementImageMultiple formElement, OnImageClickListener onImageClickListener) {
         this.mContext = mContext;
         this.formElement = formElement;
+        this.onImageClickListener = onImageClickListener;
         imagesList = new ArrayList<>();
         if (formElement.getListValue() != null && !formElement.getListValue().isEmpty()) {
             imagesList.addAll(formElement.getListValue());
@@ -68,6 +71,15 @@ public class ImageCardNormalAdapter extends RecyclerView.Adapter<ImageCardNormal
                     .load(imagePath)
                     .dontAnimate()
                     .into(iv_thumb);
+
+            iv_thumb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onImageClickListener != null) {
+                        onImageClickListener.onImageItemClick(imagePath);
+                    }
+                }
+            });
 
             iv_del.setVisibility(View.GONE);
         }

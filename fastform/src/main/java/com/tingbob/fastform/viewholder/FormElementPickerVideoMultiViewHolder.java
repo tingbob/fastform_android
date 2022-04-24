@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tingbob.fastform.R;
 import com.tingbob.fastform.adapter.VideoCardAdapter;
-import com.tingbob.fastform.listener.OnVideoAddClickListener;
+import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementObject;
 import com.tingbob.fastform.model.FormElementPickerVideoMultiple;
 
@@ -24,11 +24,11 @@ public class FormElementPickerVideoMultiViewHolder extends BaseViewHolder {
     public AppCompatTextView mTextViewTitle;
     public RecyclerView mRecyclerValue;
     public VideoCardAdapter videoCardAdapter;
-    public OnVideoAddClickListener onVideoAddClickListener;
+    public OnVideoClickListener onVideoClickListener;
 
-    public FormElementPickerVideoMultiViewHolder(View v, OnVideoAddClickListener onVideoAddClickListener) {
+    public FormElementPickerVideoMultiViewHolder(View v, OnVideoClickListener onVideoClickListener) {
         super(v);
-        this.onVideoAddClickListener = onVideoAddClickListener;
+        this.onVideoClickListener = onVideoClickListener;
         mTextViewRequired = v.findViewById(R.id.formElementRequired);
         mTextViewTitle = v.findViewById(R.id.formElementTitle);
         mRecyclerValue = v.findViewById(R.id.formElementValue);
@@ -41,7 +41,7 @@ public class FormElementPickerVideoMultiViewHolder extends BaseViewHolder {
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 2);
         mRecyclerValue.setLayoutManager(layoutManager);
         mRecyclerValue.setItemAnimator(new DefaultItemAnimator());
-        videoCardAdapter = new VideoCardAdapter(itemView.getContext(), (FormElementPickerVideoMultiple) formElement, onVideoAddClickListener);
+        videoCardAdapter = new VideoCardAdapter(itemView.getContext(), (FormElementPickerVideoMultiple) formElement, onVideoClickListener);
         mRecyclerValue.setAdapter(videoCardAdapter);
     }
 }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tingbob.fastform.R;
-import com.tingbob.fastform.listener.OnVideoAddClickListener;
+import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementPickerVideoMultiple;
 
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
     private Context mContext;
     private List<String> thumbsList;
     private final String videoAddBtnUri = "badd";
-    public OnVideoAddClickListener onVideoAddClickListener;
+    public OnVideoClickListener onVideoClickListener;
     public FormElementPickerVideoMultiple formElement;
 
-    public VideoCardAdapter(Context mContext, FormElementPickerVideoMultiple formElement, OnVideoAddClickListener onVideoAddClickListener) {
+    public VideoCardAdapter(Context mContext, FormElementPickerVideoMultiple formElement, OnVideoClickListener onVideoClickListener) {
         this.mContext = mContext;
         this.formElement = formElement;
-        this.onVideoAddClickListener = onVideoAddClickListener;
+        this.onVideoClickListener = onVideoClickListener;
         thumbsList = new ArrayList<>();
         if (formElement.getListValue() != null && !formElement.getListValue().isEmpty()) {
             thumbsList.addAll(formElement.getListValue());
@@ -76,31 +76,34 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
         }
 
         public void updateView(final int position) {
-            final String thumbPath = getItem(position);
-            if (thumbPath.equals(videoAddBtnUri)) {
+            final String videoPath = getItem(position);
+            if (videoPath.equals(videoAddBtnUri)) {
                 Glide.with(mContext)
                         .load(R.drawable.ic_image_add)
                         .dontAnimate()
                         .into(iv_thumb);
             } else {
                 Glide.with(mContext)
-                        .load(thumbPath)
+                        .load(videoPath)
                         .dontAnimate()
                         .into(iv_thumb);
             }
 
 
             boolean bAddBtn = (position == getItemCount() - 1);
+
             if (bAddBtn) {
                 iv_thumb.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) { onVideoAddClickListener.onVideoAddClick(formElement.getTag());
+                    public void onClick(View v) {
+                        if (onVideoClickListener != null) {
+                            onVideoClickListener.onVideoAddClick(formElement.getTag());
+                        }
                     }
                 });
             } else {
                 iv_thumb.setOnClickListener(null);
             }
-
 
             iv_del.setVisibility(bAddBtn ? View.GONE : View.VISIBLE);
             iv_del.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +114,14 @@ public class VideoCardAdapter extends RecyclerView.Adapter<VideoCardAdapter.Vide
             });
 
             iv_video_play.setVisibility(bAddBtn ? View.GONE : View.VISIBLE);
+            iv_video_play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onVideoClickListener != null) {
+                        onVideoClickListener.onVideoItemClick(videoPath);
+                    }
+                }
+            });
         }
     }
 }

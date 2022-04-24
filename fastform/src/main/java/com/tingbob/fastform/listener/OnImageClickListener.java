@@ -1,5 +1,6 @@
 package com.tingbob.fastform.listener;
 
-public interface OnImageAddClickListener {
+public interface OnImageClickListener {
     void onImageAddClick(String tag);
+    void onImageItemClick(String url);
 }
