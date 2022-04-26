@@ -21,6 +21,7 @@ import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnHeaderDelClickListener;
 import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnQrcodeScanButtonClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
 import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.listener.ReloadListener;
@@ -40,6 +41,7 @@ import com.tingbob.fastform.model.FormElementTextNumber;
 import com.tingbob.fastform.model.FormElementTextNumberStatistic;
 import com.tingbob.fastform.model.FormElementTextPassword;
 import com.tingbob.fastform.model.FormElementTextPhone;
+import com.tingbob.fastform.model.FormElementTextQrcodeScan;
 import com.tingbob.fastform.model.FormElementTextSingleLine;
 import com.tingbob.fastform.model.FormHeader;
 import com.tingbob.fastform.utils.Arith;
@@ -64,6 +66,7 @@ import com.tingbob.fastform.viewholder.FormElementTextNumberStatisticViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextNumberViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPasswordViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextPhoneViewHolder;
+import com.tingbob.fastform.viewholder.FormElementTextQrcodeScanViewHolder;
 import com.tingbob.fastform.viewholder.FormElementTextSingleLineViewHolder;
 import com.tingbob.fastform.viewholder.FormElementVideoMultiViewHolder;
 
@@ -82,6 +85,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     private OnButtonClickListener onButtonClickListener;
     private OnAttachAddClickListener onAttachAddClickListener;
     private OnRemoveClickListener onRemoveClickListener;
+    private OnQrcodeScanButtonClickListener onQrcodeScanButtonClickListener;
 
     /**
      * public constructor with context
@@ -114,6 +118,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
 
     public void setOnRemoveClickListener(OnRemoveClickListener onRemoveClickListener) {
         this.onRemoveClickListener = onRemoveClickListener;
+    }
+
+    public void setOnQrcodeScanButtonClickListener(OnQrcodeScanButtonClickListener onQrcodeScanButtonClickListener) {
+        this.onQrcodeScanButtonClickListener = onQrcodeScanButtonClickListener;
     }
 
     private OnHeaderDelClickListener onHeaderDelClickListener = new OnHeaderDelClickListener() {
@@ -222,6 +230,10 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
                     }
                     case IFormElementType.TYPE_PICKER_ATTACH: {
                         formElement = FormElementPickerAttach.createInstance();
+                        break;
+                    }
+                    case IFormElementType.TYPE_TEXT_QRCODE_SCAN: {
+                        formElement = FormElementTextQrcodeScan.createInstance();
                         break;
                     }
                     default:
@@ -559,6 +571,9 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
             }
             case IFormElementType.TYPE_ATTACH_NORMAL: {
                 return new FormElementAttachNormalViewHolder(inflater.inflate(R.layout.form_element_attach_normal, parent, false));
+            }
+            case IFormElementType.TYPE_TEXT_QRCODE_SCAN: {
+                return new FormElementTextQrcodeScanViewHolder(inflater.inflate(R.layout.form_element_text_qrcode_scan, parent, false), onQrcodeScanButtonClickListener);
             }
             default:
                 return new FormElementTextSingleLineViewHolder(inflater.inflate(R.layout.form_element, parent, false),

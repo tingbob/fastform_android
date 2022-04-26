@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/colorFormMasterElementBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="15dp" >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/formElementRequired"
+                android:textSize="@dimen/elementTextTitleSize"
+                android:textColor="@color/colorFormMasterRequired"
+                android:text="@string/element_required"
+                android:paddingRight="5dp"
+                android:visibility="gone"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/formElementTitle"
+                tools:text="Personal Info"
+                android:textSize="@dimen/elementTextTitleSize"
+                android:textColor="@color/colorFormMasterElementTextTitle"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/elementTextValueSize"
+            android:gravity="right"
+            android:id="@+id/formElementValue"
+            tools:text="tingbob"
+            android:padding="15dp"
+            android:textColor="@color/colorFormMasterElementTextValue"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/formElementButton"
+            android:padding="15dp"
+            android:src="@drawable/ic_qrcode_scan"
+            android:background="@color/colorFormMasterElementBackground" />
+
+    </LinearLayout>
+
+</LinearLayout>

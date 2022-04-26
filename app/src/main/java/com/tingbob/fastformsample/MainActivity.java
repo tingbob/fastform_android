@@ -14,6 +14,7 @@ import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnQrcodeScanButtonClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
 import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementButton;
@@ -32,6 +33,7 @@ import com.tingbob.fastform.model.FormElementTextNumber;
 import com.tingbob.fastform.model.FormElementTextNumberStatistic;
 import com.tingbob.fastform.model.FormElementTextPassword;
 import com.tingbob.fastform.model.FormElementTextPhone;
+import com.tingbob.fastform.model.FormElementTextQrcodeScan;
 import com.tingbob.fastform.model.FormElementTextSingleLine;
 import com.tingbob.fastform.model.FormHeader;
 
@@ -39,7 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnFormElementValueChangedListener,
-        OnImageClickListener, OnVideoClickListener, OnButtonClickListener, OnAttachAddClickListener, OnRemoveClickListener {
+        OnImageClickListener, OnVideoClickListener, OnButtonClickListener,
+        OnAttachAddClickListener, OnRemoveClickListener, OnQrcodeScanButtonClickListener {
 
     private RecyclerView mRecyclerView;
     private FormBuilder mFormBuilder;
@@ -130,6 +133,9 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         element61.setActionAddElements(objects);
         mFormBuilder.setOnButtonClickListener(this);
 
+        FormElementTextQrcodeScan element71 = FormElementTextQrcodeScan.createInstance().setTag("71").setTitle("Qrcode").setValue("Qrcode result").setRequired(true);
+        mFormBuilder.setOnOnQrcodeScanButtonClickListener(this);
+
         List<FormElementObject> formItems = new ArrayList<>();
         formItems.add(header1);
         formItems.add(element11);
@@ -153,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
         formItems.add(element52);
         formItems.add(element53);
         formItems.add(element61);
+        formItems.add(element71);
         mFormBuilder.addFormElements(formItems);
 
     }
@@ -195,5 +202,10 @@ public class MainActivity extends AppCompatActivity implements OnFormElementValu
     @Override
     public void onRemoveClick(List<String> tags) {
         Toast.makeText(this, "remove first tag = " + tags.get(0), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onQrcodeScanButtonClick(String tag) {
+        Toast.makeText(this, "Qrcode scan Click tag = " + tag, Toast.LENGTH_SHORT).show();
     }
 }

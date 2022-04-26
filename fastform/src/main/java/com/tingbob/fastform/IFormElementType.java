@@ -25,4 +25,5 @@ public interface IFormElementType {
     int TYPE_EDITTEXT_NUMBER_DECIMAL = 20;      // 小数点数字编辑框
     int TYPE_PICKER_VIDEO_MULTIPLE = 21;        // video多选
     int TYPE_VIDEO_NORMAL = 22;                 // video显示
+    int TYPE_TEXT_QRCODE_SCAN = 23;                 // video显示
 }

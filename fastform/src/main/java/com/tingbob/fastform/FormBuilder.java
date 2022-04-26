@@ -18,6 +18,7 @@ import com.tingbob.fastform.listener.OnAttachAddClickListener;
 import com.tingbob.fastform.listener.OnButtonClickListener;
 import com.tingbob.fastform.listener.OnFormElementValueChangedListener;
 import com.tingbob.fastform.listener.OnImageClickListener;
+import com.tingbob.fastform.listener.OnQrcodeScanButtonClickListener;
 import com.tingbob.fastform.listener.OnRemoveClickListener;
 import com.tingbob.fastform.listener.OnVideoClickListener;
 import com.tingbob.fastform.model.FormElementObject;
@@ -89,6 +90,10 @@ public class FormBuilder {
 
     public void setOnRemoveClickListener(OnRemoveClickListener onRemoveClickListener) {
         mFormAdapter.setOnRemoveClickListener(onRemoveClickListener);
+    }
+
+    public void setOnOnQrcodeScanButtonClickListener(OnQrcodeScanButtonClickListener onQrcodeScanButtonClickListener) {
+        mFormAdapter.setOnQrcodeScanButtonClickListener(onQrcodeScanButtonClickListener);
     }
 
     /**
