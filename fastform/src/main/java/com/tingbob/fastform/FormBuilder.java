@@ -165,4 +165,8 @@ public class FormBuilder {
     public void updateAttachList(String tag, List<String> attachList) {
         mFormAdapter.updateAttachList(tag, attachList);
     }
+
+    public void updateValueByTag(String tag, String value) {
+        mFormAdapter.updateValueAtTag(tag, value);
+    }
 }

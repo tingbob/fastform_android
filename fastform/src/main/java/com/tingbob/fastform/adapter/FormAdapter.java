@@ -322,29 +322,14 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     }
 
     /**
-     * set value for any unique index
-     * @param position
-     * @param value
-     */
-    public void setValueAtIndex(int position, String value) {
-        FormElementObject formElementObject = mDataset.get(position);
-        formElementObject.setValue(value);
-        notifyDataSetChanged();
-    }
-
-    /**
      * set value for any unique tag
      * @param tag
      * @param value
      */
-    public void setValueAtTag(int tag, String value) {
-        for (FormElementObject f : this.mDataset) {
-            if (f.getTag().equals(tag)) {
-                f.setValue(value);
-                return;
-            }
-        }
-        notifyDataSetChanged();
+    public void updateValueAtTag(String tag, String value) {
+        FormElementObject f = getElementByTag(tag);
+        f.setValue(value);
+        notifyItemChanged(getPositionByTag(tag));
     }
 
     /**
@@ -647,7 +632,7 @@ public class FormAdapter extends RecyclerView.Adapter<BaseViewHolder> implements
     @Override
     public void updateValue(int position, String updatedValue) {
         mDataset.get(position).setValue(updatedValue);
-        notifyDataSetChanged();
+        notifyItemChanged(position);
         if (mListener != null)
             mListener.onValueChanged(mDataset.get(position));
     }
